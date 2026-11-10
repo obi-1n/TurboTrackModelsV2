@@ -1,89 +1,118 @@
-﻿@model TurboTrackModels_Dotnet_Core.ViewModels.IndexViewModel
+@model TurboTrackModels_Dotnet_Core.ViewModels.IndexViewModel
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Account settings";
+    var statusMessage = Model.StatusMessage switch
+    {
+        "ChangePasswordSuccess" => "Your password was changed successfully.",
+        "SetPasswordSuccess" => "Your password was created successfully.",
+        "SetTwoFactorSuccess" => "Your two-factor authentication settings were updated.",
+        "RemovePhoneSuccess" => "Your phone number was removed.",
+        _ => Model.StatusMessage
+    };
 }
 
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
+<style>
+    .account-page {
+        max-width: 900px;
+        margin: 3rem auto;
+    }
 
-    <p class="text-success">@Model.StatusMessage</p>
-    <div>
-        <h4>Change your account settings</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>Password:</dt>
-            <dd>
-                [
+    .account-card {
+        overflow: hidden;
+        border: 0;
+        border-radius: 1rem;
+        box-shadow: 0 0.75rem 2.5rem rgba(20, 33, 48, 0.12);
+    }
+
+    .account-header {
+        padding: 2rem;
+        color: #fff;
+        background: linear-gradient(120deg, #c91f2b, #f72f35);
+    }
+
+    .account-header h1 {
+        margin-bottom: 0.5rem;
+        font-size: clamp(1.7rem, 3vw, 2.1rem);
+        font-weight: 750;
+    }
+
+    .account-header p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.85);
+    }
+
+    .account-content {
+        padding: clamp(1.25rem, 4vw, 2rem);
+    }
+
+    .setting-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.25rem 0;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .setting-row:last-child {
+        border-bottom: 0;
+    }
+
+    .setting-title {
+        margin-bottom: 0.25rem;
+        font-weight: 650;
+    }
+
+    .setting-description {
+        margin: 0;
+        color: #6c757d;
+        font-size: 0.925rem;
+    }
+
+    @@media (max-width: 575.98px) {
+        .setting-row {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    }
+</style>
+
+<main class="container account-page">
+    <section class="card account-card">
+        <header class="account-header">
+            <h1>Account settings</h1>
+            <p>Manage your password and sign-in options.</p>
+        </header>
+
+        <div class="account-content">
+            @if (!string.IsNullOrWhiteSpace(statusMessage))
+            {
+                <div class="alert alert-success" role="status">@statusMessage</div>
+            }
+
+            <div class="setting-row">
+                <div>
+                    <div class="setting-title">Password</div>
+                    <p class="setting-description">
+                        @(Model.HasPassword
+                            ? "Keep your account secure with a strong, up-to-date password."
+                            : "Add a password so you can sign in with your account credentials.")
+                    </p>
+                </div>
                 @if (Model.HasPassword)
                 {
-                    @Html.ActionLink("Change your password", "ChangePassword")
+                    <a asp-controller="Manage" asp-action="ChangePassword" class="btn btn-outline-danger">
+                        Change password
+                    </a>
                 }
                 else
                 {
-                    @Html.ActionLink("Create", "SetPassword")
+                    <a asp-controller="Manage" asp-action="SetPassword" class="btn btn-danger">
+                        Create password
+                    </a>
                 }
-                ]
-            </dd>
-            <dt>External Logins:</dt>
-            <dd>
-                @Model.Logins.Count [
-                @Html.ActionLink("Manage", "ManageLogins") ]
-            </dd>
-            @*
-                Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-                
-                See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                    for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-                
-                Uncomment the following block after you have set up two-factor authentication
-            *@
-            @*  
-                <dt>Phone Number:</dt>
-                <dd>
-                    @(Model.PhoneNumber ?? "None")
-                    @if (Model.PhoneNumber != null)
-                    {
-                        <br />
-                        <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
-                        using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
-                        }
-                    }
-                    else
-                    {
-                        <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
-                    }
-                </dd>
-            *@
-            <dt>Two-Factor Authentication:</dt>
-            <dd>
-                <p>
-                    There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                    for details on setting up this ASP.NET application to support two-factor authentication.
-                </p>
-                @*@if (Model.TwoFactor)
-                    {
-                        using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <text>Enabled
-                            <input type="submit" value="Disable" class="btn btn-link" />
-                            </text>
-                        }
-                    }
-                    else
-                    {
-                        using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <text>Disabled
-                            <input type="submit" value="Enable" class="btn btn-link" />
-                            </text>
-                        }
-                    }*@
-            </dd>
-        </dl>
-    </div>
+            </div>
+
+        </div>
+    </section>
 </main>

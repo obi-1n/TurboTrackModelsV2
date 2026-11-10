@@ -3,61 +3,112 @@
     ViewBag.Title = "Add Staff";
 }
 
-<h2>Add Staff</h2>
+<style>
+    .staff-page {
+        max-width: 860px;
+        margin: 3rem auto;
+    }
 
-@using (Html.BeginForm("AddStaff", "Admin", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
+    .staff-card {
+        overflow: hidden;
+        border: 0;
+        border-radius: 1rem;
+        box-shadow: 0 0.75rem 2.5rem rgba(20, 33, 48, 0.12);
+    }
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    .staff-card-header {
+        padding: 2rem;
+        color: #fff;
+        background: linear-gradient(120deg, #c91f2b, #f72f35);
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    .staff-card-header h1 {
+        margin: 0 0 0.5rem;
+        font-size: clamp(1.6rem, 3vw, 2rem);
+        font-weight: 750;
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    .staff-card-header p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.85);
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Role, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Role, Model.Roles, "Select role", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Role, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    .staff-card-body {
+        padding: clamp(1.25rem, 4vw, 2.5rem);
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    .staff-card .form-label {
+        font-weight: 600;
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    .staff-card .form-control,
+    .staff-card .form-select {
+        min-height: 46px;
+    }
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button type="submit" class="btn btn-primary">Create Staff</button>
-                @Html.ActionLink("Back to List", "StaffList", null, new { @class = "btn btn-default" })
-            </div>
+    .staff-card .field-validation-error {
+        display: block;
+        margin-top: 0.35rem;
+    }
+</style>
+
+<main class="container staff-page">
+    <div class="card staff-card">
+        <header class="staff-card-header">
+            <h1>Add a staff member</h1>
+            <p>Create a staff account and assign the role they need for their work.</p>
+        </header>
+
+        <div class="staff-card-body">
+            <form asp-controller="Admin" asp-action="AddStaff" method="post">
+                <div asp-validation-summary="All" class="alert alert-danger" role="alert"></div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="FirstName" class="form-label">First name</label>
+                        <input asp-for="FirstName" class="form-control" autocomplete="given-name"
+                               placeholder="e.g. Alex" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="LastName" class="form-label">Last name</label>
+                        <input asp-for="LastName" class="form-control" autocomplete="family-name"
+                               placeholder="e.g. Morgan" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Role" class="form-label">Staff role</label>
+                        <select asp-for="Role" asp-items="Model.Roles" class="form-select">
+                            <option value="">Select a role</option>
+                        </select>
+                        <span asp-validation-for="Role" class="text-danger"></span>
+                        <div class="form-text">The role controls which staff areas and tasks the account can access.</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Password" class="form-label">Temporary password</label>
+                        <input asp-for="Password" class="form-control" autocomplete="new-password"
+                               placeholder="At least 6 characters" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="ConfirmPassword" class="form-label">Confirm password</label>
+                        <input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password"
+                               placeholder="Enter the password again" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column flex-sm-row justify-content-between gap-2 mt-4 pt-3 border-top">
+                    <a asp-controller="Admin" asp-action="StaffList" class="btn btn-outline-secondary">
+                        Back to staff list
+                    </a>
+                    <button type="submit" class="btn btn-danger px-4">
+                        Create staff account
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
-}
+</main>
