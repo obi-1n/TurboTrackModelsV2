@@ -1,6 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace TurboTrackModels_Dotnet_Core.Models
 {
     /// <summary>
@@ -9,14 +6,11 @@ namespace TurboTrackModels_Dotnet_Core.Models
     /// </summary>
     public class WishlistItem
     {
-        [Key, Column(Order = 0)]
-        public string UserId { get; set; }
+        public string UserId { get; set; } = string.Empty;
 
-        [Key, Column(Order = 1)]
-        public string ProductId { get; set; }
+        public string ProductId { get; set; } = string.Empty;
 
-        [ForeignKey("ProductId")]
-        public Product Product { get; set; }
+        public Product Product { get; set; } = null!;
 
         public DateTime DateAdded { get; set; }
     }

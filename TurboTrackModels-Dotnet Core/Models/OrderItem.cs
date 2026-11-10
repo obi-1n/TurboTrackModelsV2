@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
-
 namespace TurboTrackModels_Dotnet_Core.Models
 {
     /// <summary>
@@ -13,16 +6,12 @@ namespace TurboTrackModels_Dotnet_Core.Models
     /// </summary>
     public class OrderItem
     {
-        //Composite primary key of OrderId
-        //Column order is used to specify the order of the columns in the database
-        [Key, Column(Order = 0), ForeignKey("Order")]
+        // EF Core composite keys are configured in TTMDbContext.
         public int OrderId { get; set; }
-        public Order Order { get; set; }
+        public Order Order { get; set; } = null!;
 
-        //Composite primary key of ProductId
-        [Key, Column(Order = 1), ForeignKey("Product")]
-        public string ProductId { get; set; }
-        public Product Product { get; set; }
+        public string ProductId { get; set; } = string.Empty;
+        public Product Product { get; set; } = null!;
 
         //Order total cost
         public int Quantity { get; set; }

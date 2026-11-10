@@ -1,16 +1,11 @@
-using System.Configuration;
-
 namespace TurboTrackModels_Dotnet_Core.Models
 {
     /// <summary>
-    /// Helper class to retrieve Stripe configuration settings from Web.config
+    /// Stripe configuration values bound from application configuration.
     /// </summary>
-    public static class StripeSettings
+    public class StripeSettings
     {
-        // Secret Key used for server-side API calls
-        public static string SecretKey => ConfigurationManager.AppSettings["StripeSecretKey"];
-
-        // Publishable Key used for client-side Stripe Elements
-        public static string PublishableKey => ConfigurationManager.AppSettings["StripePublishableKey"];
+        public string SecretKey { get; set; } = string.Empty;
+        public string PublishableKey { get; set; } = string.Empty;
     }
 }

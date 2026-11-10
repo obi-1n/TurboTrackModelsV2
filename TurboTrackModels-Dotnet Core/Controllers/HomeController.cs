@@ -4,11 +4,16 @@ using TurboTrackModels_Dotnet_Core.Models;
 
 namespace TurboTrackModels_Dotnet_Core.Controllers;
 
-public class HomeController : Controller
+public class HomeController(TTMDbContext context) : Controller
 {
+    //Create an instance of the database to use in the controller
+    //Read only since we are only displaying data in this controller, not modifying it
+
     public IActionResult Index()
     {
-        return View();
+        //Get the most recent models and pass them to the view
+        var cars = context.Products.OrderByDescending(m => m.ProductId);
+        return View(cars.ToList());
     }
 
     public IActionResult Privacy()

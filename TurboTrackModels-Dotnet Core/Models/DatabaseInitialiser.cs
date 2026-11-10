@@ -29,31 +29,31 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                 //•	Admin will have the responsibility to register new members of staff and provide them with a username (consists of first name, second name and company name for the domain name) and password
-                EnsureIdentitySuccess(await roleManager.CreateAsync(new IdentityRole("Admin")));
+                await EnsureRoleAsync(roleManager, "Admin");
 
                 //•	Customer – responsible for placing orders, making payments, registering on the website, can viewing order history.
-                EnsureIdentitySuccess(await roleManager.CreateAsync(new IdentityRole("Customer")));
+                await EnsureRoleAsync(roleManager, "Customer");
 
                 //•	Sales Assistant – responsible for processing customer orders, entering of orders, taking payment, customer registration.
-                EnsureIdentitySuccess(await roleManager.CreateAsync(new IdentityRole("Sales Assistant")));
+                await EnsureRoleAsync(roleManager, "Sales Assistant");
 
                 //•	Invoices Clerk – responsible for sending out invoices to corporate customers and for the processing of payments linked to these orders. 
-                EnsureIdentitySuccess(await roleManager.CreateAsync(new IdentityRole("Invoice Clerk")));
+                await EnsureRoleAsync(roleManager, "Invoice Clerk");
 
                 //•	Sales Manager – access to all data
-                EnsureIdentitySuccess(await roleManager.CreateAsync(new IdentityRole("Sales Manager")));
+                await EnsureRoleAsync(roleManager, "Sales Manager");
 
                 //•	Assistant Manager – same as Sales Assistant plus price amendments and stock control.
-                EnsureIdentitySuccess(await roleManager.CreateAsync(new IdentityRole("Assistant Manager")));
+                await EnsureRoleAsync(roleManager, "Assistant Manager");
 
                 //•	Stock Control Manager- responsible for stock control
-                EnsureIdentitySuccess(await roleManager.CreateAsync(new IdentityRole("Stock Control Manager")));
+                await EnsureRoleAsync(roleManager, "Stock Control Manager");
 
                 //•	Warehouse Assistants – responsible for the dispatch of goods to customers.
-                EnsureIdentitySuccess(await roleManager.CreateAsync(new IdentityRole("Warehouse Assistant")));
+                await EnsureRoleAsync(roleManager, "Warehouse Assistant");
 
                 //•	Delivery Guy – Delivers goods to customers.
-                EnsureIdentitySuccess(await roleManager.CreateAsync(new IdentityRole("Delivery Guy")));
+                await EnsureRoleAsync(roleManager, "Delivery Guy");
                 await context.SaveChangesAsync();
 
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -81,7 +81,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
                         EmailConfirmed = true
                     };
                     //add admin to the Users table
-                    EnsureIdentitySuccess(await userManager.CreateAsync(administrator, "admin123"));
+                    EnsureIdentitySuccess(await userManager.CreateAsync(administrator, "Admin123!"));
                     //assign it to the admin role
                     EnsureIdentitySuccess(await userManager.AddToRoleAsync(administrator, "Admin"));
                 }
@@ -103,7 +103,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 };
                 if (await userManager.FindByNameAsync("bill@gmail.com") == null)
                 {
-                    EnsureIdentitySuccess(await userManager.CreateAsync(bill, "customer1"));
+                    EnsureIdentitySuccess(await userManager.CreateAsync(bill, "BillCustomer1!"));
                     EnsureIdentitySuccess(await userManager.AddToRoleAsync(bill, "Customer"));
                 }
                 await context.SaveChangesAsync();
@@ -133,7 +133,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 };
                 if (await userManager.FindByNameAsync("sally@gmail.com") == null)
                 {
-                    EnsureIdentitySuccess(await userManager.CreateAsync(sally, "customer2"));
+                    EnsureIdentitySuccess(await userManager.CreateAsync(sally, "SallyCustomer1!"));
                     EnsureIdentitySuccess(await userManager.AddToRoleAsync(sally, "Customer"));
                 }
                 await context.SaveChangesAsync();
@@ -163,7 +163,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 };
                 if (await userManager.FindByNameAsync("michael@gmail.com") == null)
                 {
-                    EnsureIdentitySuccess(await userManager.CreateAsync(michael, "customer3"));
+                    EnsureIdentitySuccess(await userManager.CreateAsync(michael, "MichaelCustomer1!"));
                     EnsureIdentitySuccess(await userManager.AddToRoleAsync(michael, "Customer"));
                 }
                 await context.SaveChangesAsync();
@@ -193,7 +193,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 };
                 if (await userManager.FindByNameAsync("emma@gmail.com") == null)
                 {
-                    EnsureIdentitySuccess(await userManager.CreateAsync(emma, "customer4"));
+                    EnsureIdentitySuccess(await userManager.CreateAsync(emma, "EmmaCustomer1!"));
                     EnsureIdentitySuccess(await userManager.AddToRoleAsync(emma, "Customer"));
                 }
                 await context.SaveChangesAsync();
@@ -223,7 +223,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 };
                 if (await userManager.FindByNameAsync("james@gmail.com") == null)
                 {
-                    EnsureIdentitySuccess(await userManager.CreateAsync(james, "customer5"));
+                    EnsureIdentitySuccess(await userManager.CreateAsync(james, "JamesCustomer1!"));
                     EnsureIdentitySuccess(await userManager.AddToRoleAsync(james, "Customer"));
                 }
                 await context.SaveChangesAsync();
@@ -253,7 +253,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 };
                 if (await userManager.FindByNameAsync("rachel@gmail.com") == null)
                 {
-                    EnsureIdentitySuccess(await userManager.CreateAsync(rachel, "customer6"));
+                    EnsureIdentitySuccess(await userManager.CreateAsync(rachel, "RachelCustomer1!"));
                     EnsureIdentitySuccess(await userManager.AddToRoleAsync(rachel, "Customer"));
                 }
                 await context.SaveChangesAsync();
@@ -283,7 +283,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 };
                 if (await userManager.FindByNameAsync("david@gmail.com") == null)
                 {
-                    EnsureIdentitySuccess(await userManager.CreateAsync(david, "customer7"));
+                    EnsureIdentitySuccess(await userManager.CreateAsync(david, "DavidCustomer1!"));
                     EnsureIdentitySuccess(await userManager.AddToRoleAsync(david, "Customer"));
                 }
                 await context.SaveChangesAsync();
@@ -313,7 +313,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 };
                 if (await userManager.FindByNameAsync("catherine@gmail.com") == null)
                 {
-                    EnsureIdentitySuccess(await userManager.CreateAsync(catherine, "customer8"));
+                    EnsureIdentitySuccess(await userManager.CreateAsync(catherine, "CatherineCustomer1!"));
                     EnsureIdentitySuccess(await userManager.AddToRoleAsync(catherine, "Customer"));
                 }
                 await context.SaveChangesAsync();
@@ -343,7 +343,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 };
                 if (await userManager.FindByNameAsync("christopher@gmail.com") == null)
                 {
-                    EnsureIdentitySuccess(await userManager.CreateAsync(christopher, "customer9"));
+                    EnsureIdentitySuccess(await userManager.CreateAsync(christopher, "ChrisCustomer1!"));
                     EnsureIdentitySuccess(await userManager.AddToRoleAsync(christopher, "Customer"));
                 }
                 await context.SaveChangesAsync();
@@ -378,7 +378,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 };
                 if (await userManager.FindByNameAsync("kellyJackson@TTM.com") == null)
                 {
-                    EnsureIdentitySuccess(await userManager.CreateAsync(kelly, "kjAssistant1"));
+                    EnsureIdentitySuccess(await userManager.CreateAsync(kelly, "KellyAssistant1!"));
                     EnsureIdentitySuccess(await userManager.AddToRoleAsync(kelly, "Sales Assistant"));
                 }
                 await context.SaveChangesAsync();
@@ -405,7 +405,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 };
                 if (await userManager.FindByNameAsync("johnSmith@TTM.com") == null)
                 {
-                    EnsureIdentitySuccess(await userManager.CreateAsync(john, "jsClerk1"));
+                    EnsureIdentitySuccess(await userManager.CreateAsync(john, "JohnClerk1!"));
                     EnsureIdentitySuccess(await userManager.AddToRoleAsync(john, "Invoice Clerk"));
                 }
                 await context.SaveChangesAsync();
@@ -432,7 +432,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 };
                 if (await userManager.FindByNameAsync("sarahLee@TTM.com") == null)
                 {
-                    EnsureIdentitySuccess(await userManager.CreateAsync(sarah, "slManager1"));
+                    EnsureIdentitySuccess(await userManager.CreateAsync(sarah, "SarahManager1!"));
                     EnsureIdentitySuccess(await userManager.AddToRoleAsync(sarah, "Sales Manager"));
                 }
                 await context.SaveChangesAsync();
@@ -459,7 +459,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 };
                 if (await userManager.FindByNameAsync("tomBrown@TTM.com") == null)
                 {
-                    EnsureIdentitySuccess(await userManager.CreateAsync(tom, "tbAssistant1"));
+                    EnsureIdentitySuccess(await userManager.CreateAsync(tom, "TomAssistant1!"));
                     EnsureIdentitySuccess(await userManager.AddToRoleAsync(tom, "Assistant Manager"));
                 }
                 await context.SaveChangesAsync();
@@ -486,7 +486,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 };
                 if (await userManager.FindByNameAsync("lisaGreen@TTM.com") == null)
                 {
-                    EnsureIdentitySuccess(await userManager.CreateAsync(lisa, "lgStock1"));
+                    EnsureIdentitySuccess(await userManager.CreateAsync(lisa, "LisaStock1!"));
                     EnsureIdentitySuccess(await userManager.AddToRoleAsync(lisa, "Stock Control Manager"));
                 }
                 await context.SaveChangesAsync();
@@ -512,7 +512,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 };
                 if (await userManager.FindByNameAsync("markWilson@TTM.com") == null)
                 {
-                    EnsureIdentitySuccess(await userManager.CreateAsync(mark, "mwWarehouse1"));
+                    EnsureIdentitySuccess(await userManager.CreateAsync(mark, "MarkWarehouse1!"));
                     EnsureIdentitySuccess(await userManager.AddToRoleAsync(mark, "Warehouse Assistant"));
                 }
                 await context.SaveChangesAsync();
@@ -538,7 +538,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 };
                 if (await userManager.FindByNameAsync("davidWilson@TTM.com") == null)
                 {
-                    EnsureIdentitySuccess(await userManager.CreateAsync(davidw, "dwDelivery1"));
+                    EnsureIdentitySuccess(await userManager.CreateAsync(davidw, "DavidDelivery1!"));
                     EnsureIdentitySuccess(await userManager.AddToRoleAsync(davidw, "Delivery Guy"));
                 }
                 await context.SaveChangesAsync();
@@ -764,6 +764,14 @@ namespace TurboTrackModels_Dotnet_Core.Models
             {
                 var errors = string.Join("; ", result.Errors.Select(error => $"{error.Code}: {error.Description}"));
                 throw new InvalidOperationException($"Database seeding failed: {errors}");
+            }
+        }
+
+        private static async Task EnsureRoleAsync(RoleManager<IdentityRole> roleManager, string roleName)
+        {
+            if (!await roleManager.RoleExistsAsync(roleName))
+            {
+                EnsureIdentitySuccess(await roleManager.CreateAsync(new IdentityRole(roleName)));
             }
         }
     }

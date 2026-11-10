@@ -1,47 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Http;
 
 namespace TurboTrackModels_Dotnet_Core.Models
 {
     /// <summary>
-    /// Provides functionality to manage a shopping cart within a user session, including
-    /// tasks such as adding, removing, and updating products in the cart, as well as clearing the cart.
+    /// Manages a shopping cart stored in ASP.NET Core session state.
     /// </summary>
     public class ShoppingCartService
     {
-        // Service to manage the shopping cart using session state
-        private readonly HttpSessionStateBase _session;
-        // Key to store the shopping cart in session
         private const string CartKey = "Cart";
-
-        // Constructor to initialize the shopping cart service with the session
-        public ShoppingCartService(HttpSessionStateBase session)
+        private static readonly JsonSerializerOptions SerializerOptions = new()
         {
-            // Store the session for later use
-            _session = session;
+            ReferenceHandler = ReferenceHandler.IgnoreCycles
+        };
+
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public ShoppingCartService(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
         }
 
-        // Method to retrieve the shopping cart from session, or create a new one if it doesn't exist
         public ShoppingCart GetCart()
         {
-            // Check if the cart exists in session, if not create a new one
-            if (_session[CartKey] == null)
-                _session[CartKey] = new ShoppingCart();
+            var serializedCart = GetSession().GetString(CartKey);
+            if (serializedCart is null)
+            {
+                return new ShoppingCart();
+            }
 
-            return (ShoppingCart)_session[CartKey];
+            return JsonSerializer.Deserialize<ShoppingCart>(serializedCart, SerializerOptions)
+                ?? throw new InvalidOperationException("The shopping cart in session is invalid.");
         }
 
-        // Method to add a product to the shopping cart
         public void AddToCart(Product product)
         {
-            // Retrieve the current cart from session
-            var cart = GetCart();
+            ArgumentNullException.ThrowIfNull(product);
 
-            // Check if the product is already in the cart
+            var cart = GetCart();
             var item = cart.Items.FirstOrDefault(i => i.ProductId == product.ProductId);
-            if (item == null)
+            if (item is null)
             {
                 cart.Items.Add(new CartItem
                 {
@@ -52,40 +51,60 @@ namespace TurboTrackModels_Dotnet_Core.Models
             }
             else
             {
+                item.Product = product;
                 item.Quantity++;
             }
+
+            SaveCart(cart);
         }
 
-        // Method to remove a product from the shopping cart by product ID
         public void RemoveFromCart(string productId)
         {
-            // Retrieve the current cart from session
-            var cart = GetCart();
-            var item = cart.Items.FirstOrDefault(i => i.ProductId == productId);
-            // If the item is found, remove it from the cart
-            if (item != null)
-                cart.Items.Remove(item);
-        }
+            ArgumentNullException.ThrowIfNull(productId);
 
-        // Method to update product quantity
-        public void UpdateQuantity(string productId, int change)
-        {
             var cart = GetCart();
             var item = cart.Items.FirstOrDefault(i => i.ProductId == productId);
-            if (item != null)
+            if (item is not null)
             {
-                item.Quantity += change;
-                if (item.Quantity <= 0)
-                {
-                    cart.Items.Remove(item);
-                }
+                cart.Items.Remove(item);
+                SaveCart(cart);
             }
         }
 
-        // Method to clear the shopping cart from session
+        public void UpdateQuantity(string productId, int change)
+        {
+            ArgumentNullException.ThrowIfNull(productId);
+
+            var cart = GetCart();
+            var item = cart.Items.FirstOrDefault(i => i.ProductId == productId);
+            if (item is null)
+            {
+                return;
+            }
+
+            item.Quantity += change;
+            if (item.Quantity <= 0)
+            {
+                cart.Items.Remove(item);
+            }
+
+            SaveCart(cart);
+        }
+
         public void Clear()
         {
-            _session.Remove(CartKey);
+            GetSession().Remove(CartKey);
+        }
+
+        private ISession GetSession()
+        {
+            return _httpContextAccessor.HttpContext?.Session
+                ?? throw new InvalidOperationException("An active HTTP session is required.");
+        }
+
+        private void SaveCart(ShoppingCart cart)
+        {
+            GetSession().SetString(CartKey, JsonSerializer.Serialize(cart, SerializerOptions));
         }
     }
 }

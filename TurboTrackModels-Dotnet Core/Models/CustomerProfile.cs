@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace TurboTrackModels_Dotnet_Core.Models
 {
@@ -22,20 +19,20 @@ namespace TurboTrackModels_Dotnet_Core.Models
         //CustomerID is not used for login, it is only used to identify the customer in the database and link to orders
         [Key]
         public int CustomerID { get; set; }
-        public string Street { get; set; }
-        public string Town { get; set; }
-        public string PostCode { get; set; }
-        public string PhoneNumber { get; set; }
+        public string Street { get; set; } = string.Empty;
+        public string Town { get; set; } = string.Empty;
+        public string PostCode { get; set; } = string.Empty;
+        public string PhoneNumber { get; set; } = string.Empty;
 
         //Navigational properties
         //A customer can have many orders, but an order can only have one customer
-        public List<Order> Orders { get; set; }
+        public List<Order> Orders { get; set; } = new();
 
         //Foreign key for ApplicationUser
         //Links the CustomerProfile to the user account
         [ForeignKey("User")]
-        public string UserId { get; set; }
-        public User User { get; set; }
+        public string UserId { get; set; } = string.Empty;
+        public User User { get; set; } = null!;
 
     }
 }

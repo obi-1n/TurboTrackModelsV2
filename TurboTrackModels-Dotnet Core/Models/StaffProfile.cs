@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace TurboTrackModels_Dotnet_Core.Models
 {
@@ -24,8 +20,8 @@ namespace TurboTrackModels_Dotnet_Core.Models
         //Navigational properties
         //Links the StaffProfile to the user account
         [ForeignKey("User")]
-        public string UserId { get; set; }
-        public User User { get; set; }
+        public string UserId { get; set; } = string.Empty;
+        public User User { get; set; } = null!;
 
     }
 }

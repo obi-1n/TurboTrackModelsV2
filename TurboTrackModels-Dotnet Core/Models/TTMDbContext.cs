@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data.Entity;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace TurboTrackModels_Dotnet_Core.Models
 {
@@ -18,19 +14,38 @@ namespace TurboTrackModels_Dotnet_Core.Models
         {
         }
 
-        // DbSets
-        public DbSet<CustomerProfile> Customers { get; set; }
-        public DbSet<StaffProfile> Staff { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<OrderItem> OrderItems { get; set; }
-        public DbSet<WishlistItem> WishlistItems { get; set; }
+        public DbSet<CustomerProfile> Customers => Set<CustomerProfile>();
+        public DbSet<StaffProfile> Staff => Set<StaffProfile>();
+        public DbSet<Order> Orders => Set<Order>();
+        public DbSet<Product> Products => Set<Product>();
+        public DbSet<OrderItem> OrderItems => Set<OrderItem>();
+        public DbSet<WishlistItem> WishlistItems => Set<WishlistItem>();
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            // Fluent API configurations go here if required
+            builder.Entity<OrderItem>()
+                .HasKey(item => new { item.OrderId, item.ProductId });
+
+            builder.Entity<WishlistItem>()
+                .HasKey(item => new { item.UserId, item.ProductId });
+
+            builder.Entity<WishlistItem>()
+                .HasOne<User>()
+                .WithMany()
+                .HasForeignKey(item => item.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<CustomerProfile>()
+                .HasOne(profile => profile.User)
+                .WithOne()
+                .HasForeignKey<CustomerProfile>(profile => profile.UserId);
+
+            builder.Entity<StaffProfile>()
+                .HasOne(profile => profile.User)
+                .WithOne()
+                .HasForeignKey<StaffProfile>(profile => profile.UserId);
         }
     }
 }
