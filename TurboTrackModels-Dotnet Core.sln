@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboTrackModels-Dotnet Core", "TurboTrackModels-Dotnet Core\TurboTrackModels-Dotnet Core.csproj", "{EC5B5160-B596-41E9-9E63-F26061139550}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC5B5160-B596-41E9-9E63-F26061139550}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC5B5160-B596-41E9-9E63-F26061139550}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC5B5160-B596-41E9-9E63-F26061139550}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC5B5160-B596-41E9-9E63-F26061139550}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
