@@ -8,19 +8,17 @@ using System.Data.Entity;
 namespace TurboTrackModels_Dotnet_Core.Models
 {
     /// <summary>
-    /// Represents the Entity Framework database context for the Turbo Track Models Application.
+    /// Represents the Entity Framework Core database context for the
+    /// Turbo Track Models application.
     /// </summary>
-    /// <remarks>
-    /// Inherits from <see cref="Microsoft.AspNet.Identity.EntityFramework.IdentityDbContext{TUser}"/>,
-    /// where TUser is of type <see cref="User"/>. This context is responsible for managing
-    /// database operations and providing DbSet properties for the application's data models.
-    /// </remarks>
-    /// <example>
-    /// Use <c>TTMDbContext.Create()</c> to create a new instance of the database context.
-    /// </example>
     public class TTMDbContext : IdentityDbContext<User>
     {
-        //DbSet for each of the models in the application
+        public TTMDbContext(DbContextOptions<TTMDbContext> options)
+            : base(options)
+        {
+        }
+
+        // DbSets
         public DbSet<CustomerProfile> Customers { get; set; }
         public DbSet<StaffProfile> Staff { get; set; }
         public DbSet<Order> Orders { get; set; }
@@ -28,16 +26,11 @@ namespace TurboTrackModels_Dotnet_Core.Models
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<WishlistItem> WishlistItems { get; set; }
 
-        public TTMDbContext()
-            : base("TTMConnection", throwIfV1Schema: false)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            //Set the database initializer to the custom one we created
-            Database.SetInitializer<TTMDbContext>(new DatabaseInitialiser());
-        }
+            base.OnModelCreating(builder);
 
-        public static TTMDbContext Create()
-        {
-            return new TTMDbContext();
+            // Fluent API configurations go here if required
         }
     }
 }

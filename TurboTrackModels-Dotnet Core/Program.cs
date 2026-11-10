@@ -1,4 +1,14 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
+using TurboTrackModels_Dotnet_Core.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+
+//Database
+builder.Services.AddDbContext<TTMDbContext>(options =>
+    options.UseSqlite(
+        builder.Configuration.GetConnectionString("TTMConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

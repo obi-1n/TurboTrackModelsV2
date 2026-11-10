@@ -129,3 +129,4 @@
 /Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/TurboTrackModels-Dotnet Core.pdb
 /Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/TurboTrackModels-Dotnet Core.genruntimeconfig.cache
 /Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/ref/TurboTrackModels-Dotnet Core.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/TurboTrackModels-Dotnet Core.sourcelink.json

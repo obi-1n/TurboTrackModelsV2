@@ -1,66 +1,65 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 
 namespace TurboTrackModels_Dotnet_Core.Models
 {
     /// <summary>
     /// Initialises the database with seed data including roles, admin users, customer profiles, and product catalogs.
-    /// Inherits from <see cref="DropCreateDatabaseIfModelChanges{TContext}"/> for development flexibility.
     /// </summary>
-    public class DatabaseInitialiser : DropCreateDatabaseIfModelChanges<TTMDbContext> 
+    public static class DatabaseInitialiser
     {
-        /// <summary>
-        /// Seeds the database with initial data.
-        /// </summary>
-        /// <param name="context">The database context.</param>
-        protected override void Seed(TTMDbContext context)
+        public static async Task SeedAsync(
+            IServiceProvider serviceProvider)
         {
-            // create a single UserManager instance to reuse (prevents duplicate local declarations)
-            UserManager<User> userManager = new UserManager<User>(new UserStore<User>(context));
+            ArgumentNullException.ThrowIfNull(serviceProvider);
 
-            //if there are no users, create a default admin user
-            if (!context.Users.Any())
+            var context = serviceProvider.GetRequiredService<TTMDbContext>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
+
+            if (!await context.Users.AnyAsync())
             {
+                var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //1. CREATE ALL THE ROLES
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
                 //•	Admin will have the responsibility to register new members of staff and provide them with a username (consists of first name, second name and company name for the domain name) and password
-                roleManager.Create(new IdentityRole("Admin"));
+                EnsureIdentitySuccess(await roleManager.CreateAsync(new IdentityRole("Admin")));
 
                 //•	Customer – responsible for placing orders, making payments, registering on the website, can viewing order history.
-                roleManager.Create(new IdentityRole("Customer"));
+                EnsureIdentitySuccess(await roleManager.CreateAsync(new IdentityRole("Customer")));
 
                 //•	Sales Assistant – responsible for processing customer orders, entering of orders, taking payment, customer registration.
-                roleManager.Create(new IdentityRole("Sales Assistant"));
+                EnsureIdentitySuccess(await roleManager.CreateAsync(new IdentityRole("Sales Assistant")));
 
                 //•	Invoices Clerk – responsible for sending out invoices to corporate customers and for the processing of payments linked to these orders. 
-                roleManager.Create(new IdentityRole("Invoice Clerk"));
+                EnsureIdentitySuccess(await roleManager.CreateAsync(new IdentityRole("Invoice Clerk")));
 
                 //•	Sales Manager – access to all data
-                roleManager.Create(new IdentityRole("Sales Manager"));
+                EnsureIdentitySuccess(await roleManager.CreateAsync(new IdentityRole("Sales Manager")));
 
                 //•	Assistant Manager – same as Sales Assistant plus price amendments and stock control.
-                roleManager.Create(new IdentityRole("Assistant Manager"));
+                EnsureIdentitySuccess(await roleManager.CreateAsync(new IdentityRole("Assistant Manager")));
 
                 //•	Stock Control Manager- responsible for stock control
-                roleManager.Create(new IdentityRole("Stock Control Manager"));
+                EnsureIdentitySuccess(await roleManager.CreateAsync(new IdentityRole("Stock Control Manager")));
 
                 //•	Warehouse Assistants – responsible for the dispatch of goods to customers.
-                roleManager.Create(new IdentityRole("Warehouse Assistant"));
+                EnsureIdentitySuccess(await roleManager.CreateAsync(new IdentityRole("Warehouse Assistant")));
 
                 //•	Delivery Guy – Delivers goods to customers.
-                roleManager.Create(new IdentityRole("Delivery Guy"));
-                context.SaveChanges();
+                EnsureIdentitySuccess(await roleManager.CreateAsync(new IdentityRole("Delivery Guy")));
+                await context.SaveChangesAsync();
 
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //2. CREATE A DEFAULT ADMIN USER AND ASSIGN IT TO THE ADMIN ROLE
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                if (userManager.FindByName("admin@TTM.com") == null)
+                if (await userManager.FindByNameAsync("admin@TTM.com") == null)
                 {
                     //// Super liberal password validation for password for seeds
                     //userManager.PasswordValidator = new PasswordValidator
@@ -82,11 +81,11 @@ namespace TurboTrackModels_Dotnet_Core.Models
                         EmailConfirmed = true
                     };
                     //add admin to the Users table
-                    userManager.Create(administrator, "admin123");
+                    EnsureIdentitySuccess(await userManager.CreateAsync(administrator, "admin123"));
                     //assign it to the admin role
-                    userManager.AddToRole(administrator.Id, "Admin");
+                    EnsureIdentitySuccess(await userManager.AddToRoleAsync(administrator, "Admin"));
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //3. CREATE A FEW CUSTOMER USERS AND PROFILES
@@ -102,12 +101,12 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     FirstName = "Billy",
                     LastName = "Crow"
                 };
-                if (userManager.FindByName("bill@gmail.com") == null)
+                if (await userManager.FindByNameAsync("bill@gmail.com") == null)
                 {
-                    userManager.Create(bill, "customer1");
-                    userManager.AddToRole(bill.Id, "Customer");
+                    EnsureIdentitySuccess(await userManager.CreateAsync(bill, "customer1"));
+                    EnsureIdentitySuccess(await userManager.AddToRoleAsync(bill, "Customer"));
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //Customer profile for Bill Crow
                 var billCustomerProfile = new CustomerProfile
@@ -118,11 +117,11 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     PhoneNumber = "07776560983",
                     UserId = bill.Id
                 };
-                if (!context.Customers.Any(c => c.UserId == bill.Id))
+                if (!await context.Customers.AnyAsync(c => c.UserId == bill.Id))
                 {
                     context.Customers.Add(billCustomerProfile);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //User account for Sally Crow
                 var sally = new User
@@ -132,12 +131,12 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     FirstName = "Sally",
                     LastName = "Crow"
                 };
-                if (userManager.FindByName("sally@gmail.com") == null)
+                if (await userManager.FindByNameAsync("sally@gmail.com") == null)
                 {
-                    userManager.Create(sally, "customer2");
-                    userManager.AddToRole(sally.Id, "Customer");
+                    EnsureIdentitySuccess(await userManager.CreateAsync(sally, "customer2"));
+                    EnsureIdentitySuccess(await userManager.AddToRoleAsync(sally, "Customer"));
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //Customer profile for Sally Crow
                 var sallyCustomerProfile = new CustomerProfile
@@ -148,11 +147,11 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     PhoneNumber = "01313334444",
                     UserId = sally.Id
                 };
-                if (!context.Customers.Any(c => c.UserId == sally.Id))
+                if (!await context.Customers.AnyAsync(c => c.UserId == sally.Id))
                 {
                     context.Customers.Add(sallyCustomerProfile);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //User account for Michael Thompson
                 var michael = new User
@@ -162,12 +161,12 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     FirstName = "Michael",
                     LastName = "Thompson"
                 };
-                if (userManager.FindByName("michael@gmail.com") == null)
+                if (await userManager.FindByNameAsync("michael@gmail.com") == null)
                 {
-                    userManager.Create(michael, "customer3");
-                    userManager.AddToRole(michael.Id, "Customer");
+                    EnsureIdentitySuccess(await userManager.CreateAsync(michael, "customer3"));
+                    EnsureIdentitySuccess(await userManager.AddToRoleAsync(michael, "Customer"));
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //Customer profile for Michael Thompson
                 var michaelCustomerProfile = new CustomerProfile
@@ -178,11 +177,11 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     PhoneNumber = "012245556666",
                     UserId = michael.Id
                 };
-                if (!context.Customers.Any(c => c.UserId == michael.Id))
+                if (!await context.Customers.AnyAsync(c => c.UserId == michael.Id))
                 {
                     context.Customers.Add(michaelCustomerProfile);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //User account for Emma Davies
                 var emma = new User
@@ -192,12 +191,12 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     FirstName = "Emma",
                     LastName = "Davies"
                 };
-                if (userManager.FindByName("emma@gmail.com") == null)
+                if (await userManager.FindByNameAsync("emma@gmail.com") == null)
                 {
-                    userManager.Create(emma, "customer4");
-                    userManager.AddToRole(emma.Id, "Customer");
+                    EnsureIdentitySuccess(await userManager.CreateAsync(emma, "customer4"));
+                    EnsureIdentitySuccess(await userManager.AddToRoleAsync(emma, "Customer"));
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //Customer profile for Emma Davies
                 var emmaCustomerProfile = new CustomerProfile
@@ -208,11 +207,11 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     PhoneNumber = "017867778888",
                     UserId = emma.Id
                 };
-                if (!context.Customers.Any(c => c.UserId == emma.Id))
+                if (!await context.Customers.AnyAsync(c => c.UserId == emma.Id))
                 {
                     context.Customers.Add(emmaCustomerProfile);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //User account for James McKenzie
                 var james = new User
@@ -222,12 +221,12 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     FirstName = "James",
                     LastName = "McKenzie"
                 };
-                if (userManager.FindByName("james@gmail.com") == null)
+                if (await userManager.FindByNameAsync("james@gmail.com") == null)
                 {
-                    userManager.Create(james, "customer5");
-                    userManager.AddToRole(james.Id, "Customer");
+                    EnsureIdentitySuccess(await userManager.CreateAsync(james, "customer5"));
+                    EnsureIdentitySuccess(await userManager.AddToRoleAsync(james, "Customer"));
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //Customer profile for James McKenzie
                 var jamesCustomerProfile = new CustomerProfile
@@ -238,11 +237,11 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     PhoneNumber = "01382 999 0000",
                     UserId = james.Id
                 };
-                if (!context.Customers.Any(c => c.UserId == james.Id))
+                if (!await context.Customers.AnyAsync(c => c.UserId == james.Id))
                 {
                     context.Customers.Add(jamesCustomerProfile);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //User account for Rachel Mitchell
                 var rachel = new User
@@ -252,12 +251,12 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     FirstName = "Rachel",
                     LastName = "Mitchell"
                 };
-                if (userManager.FindByName("rachel@gmail.com") == null)
+                if (await userManager.FindByNameAsync("rachel@gmail.com") == null)
                 {
-                    userManager.Create(rachel, "customer6");
-                    userManager.AddToRole(rachel.Id, "Customer");
+                    EnsureIdentitySuccess(await userManager.CreateAsync(rachel, "customer6"));
+                    EnsureIdentitySuccess(await userManager.AddToRoleAsync(rachel, "Customer"));
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //Customer profile for Rachel Mitchell
                 var rachelCustomerProfile = new CustomerProfile
@@ -268,11 +267,11 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     PhoneNumber = "01463 111 2222",
                     UserId = rachel.Id
                 };
-                if (!context.Customers.Any(c => c.UserId == rachel.Id))
+                if (!await context.Customers.AnyAsync(c => c.UserId == rachel.Id))
                 {
                     context.Customers.Add(rachelCustomerProfile);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //User account for David Robertson
                 var david = new User
@@ -282,12 +281,12 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     FirstName = "David",
                     LastName = "Robertson"
                 };
-                if (userManager.FindByName("david@gmail.com") == null)
+                if (await userManager.FindByNameAsync("david@gmail.com") == null)
                 {
-                    userManager.Create(david, "customer7");
-                    userManager.AddToRole(david.Id, "Customer");
+                    EnsureIdentitySuccess(await userManager.CreateAsync(david, "customer7"));
+                    EnsureIdentitySuccess(await userManager.AddToRoleAsync(david, "Customer"));
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //Customer profile for David Robertson
                 var davidCustomerProfile = new CustomerProfile
@@ -298,11 +297,11 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     PhoneNumber = "01292 333 4444",
                     UserId = david.Id
                 };
-                if (!context.Customers.Any(c => c.UserId == david.Id))
+                if (!await context.Customers.AnyAsync(c => c.UserId == david.Id))
                 {
                     context.Customers.Add(davidCustomerProfile);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //User account for Catherine Stewart
                 var catherine = new User
@@ -312,12 +311,12 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     FirstName = "Catherine",
                     LastName = "Stewart"
                 };
-                if (userManager.FindByName("catherine@gmail.com") == null)
+                if (await userManager.FindByNameAsync("catherine@gmail.com") == null)
                 {
-                    userManager.Create(catherine, "customer8");
-                    userManager.AddToRole(catherine.Id, "Customer");
+                    EnsureIdentitySuccess(await userManager.CreateAsync(catherine, "customer8"));
+                    EnsureIdentitySuccess(await userManager.AddToRoleAsync(catherine, "Customer"));
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //Customer profile for Catherine Stewart
                 var catherineCustomerProfile = new CustomerProfile
@@ -328,11 +327,11 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     PhoneNumber = "01324 555 6666",
                     UserId = catherine.Id
                 };
-                if (!context.Customers.Any(c => c.UserId == catherine.Id))
+                if (!await context.Customers.AnyAsync(c => c.UserId == catherine.Id))
                 {
                     context.Customers.Add(catherineCustomerProfile);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //User account for Christopher Hayes
                 var christopher = new User
@@ -342,12 +341,12 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     FirstName = "Christopher",
                     LastName = "Hayes"
                 };
-                if (userManager.FindByName("christopher@gmail.com") == null)
+                if (await userManager.FindByNameAsync("christopher@gmail.com") == null)
                 {
-                    userManager.Create(christopher, "customer9");
-                    userManager.AddToRole(christopher.Id, "Customer");
+                    EnsureIdentitySuccess(await userManager.CreateAsync(christopher, "customer9"));
+                    EnsureIdentitySuccess(await userManager.AddToRoleAsync(christopher, "Customer"));
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //Customer profile for Christopher Hayes
                 var christopherCustomerProfile = new CustomerProfile
@@ -358,11 +357,11 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     PhoneNumber = "01738 777 8888",
                     UserId = christopher.Id
                 };
-                if (!context.Customers.Any(c => c.UserId == christopher.Id))
+                if (!await context.Customers.AnyAsync(c => c.UserId == christopher.Id))
                 {
                     context.Customers.Add(christopherCustomerProfile);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
 
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -377,23 +376,23 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     FirstName = "Kelly",
                     LastName = "Jackson"
                 };
-                if (userManager.FindByName("kellyJackson@TTM.com") == null)
+                if (await userManager.FindByNameAsync("kellyJackson@TTM.com") == null)
                 {
-                    userManager.Create(kelly, "kjAssistant1");
-                    userManager.AddToRole(kelly.Id, "Sales Assistant");
+                    EnsureIdentitySuccess(await userManager.CreateAsync(kelly, "kjAssistant1"));
+                    EnsureIdentitySuccess(await userManager.AddToRoleAsync(kelly, "Sales Assistant"));
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //Staff profile for Kelly Jackson
                 var kellyStaffProfile = new StaffProfile
                 {
                     UserId = kelly.Id
                 };
-                if (!context.Staff.Any(s => s.UserId == kelly.Id))
+                if (!await context.Staff.AnyAsync(s => s.UserId == kelly.Id))
                 {
                     context.Staff.Add(kellyStaffProfile);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
 
                 //User account for John Smith - an invoice clerk
@@ -404,23 +403,23 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     FirstName = "John",
                     LastName = "Smith"
                 };
-                if (userManager.FindByName("johnSmith@TTM.com") == null)
+                if (await userManager.FindByNameAsync("johnSmith@TTM.com") == null)
                 {
-                    userManager.Create(john, "jsClerk1");
-                    userManager.AddToRole(john.Id, "Invoice Clerk");
+                    EnsureIdentitySuccess(await userManager.CreateAsync(john, "jsClerk1"));
+                    EnsureIdentitySuccess(await userManager.AddToRoleAsync(john, "Invoice Clerk"));
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //Staff profile for John Smith
                 var johnStaffProfile = new StaffProfile
                 {
                     UserId = john.Id
                 };
-                if (!(context.Staff.Any(s => s.UserId == john.Id)))
+                if (!(await context.Staff.AnyAsync(s => s.UserId == john.Id)))
                 {
                     context.Staff.Add(johnStaffProfile);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
 
                 //User account for Sarah Lee - a sales manager
@@ -431,23 +430,23 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     FirstName = "Sarah",
                     LastName = "Lee"
                 };
-                if (userManager.FindByName("sarahLee@TTM.com") == null)
+                if (await userManager.FindByNameAsync("sarahLee@TTM.com") == null)
                 {
-                    userManager.Create(sarah, "slManager1");
-                    userManager.AddToRole(sarah.Id, "Sales Manager");
+                    EnsureIdentitySuccess(await userManager.CreateAsync(sarah, "slManager1"));
+                    EnsureIdentitySuccess(await userManager.AddToRoleAsync(sarah, "Sales Manager"));
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //Staff profile for Sarah Lee
                 var sarahStaffProfile = new StaffProfile
                 {
                     UserId = sarah.Id
                 };
-                if (!context.Staff.Any(s => s.UserId == sarah.Id))
+                if (!await context.Staff.AnyAsync(s => s.UserId == sarah.Id))
                 {
                     context.Staff.Add(sarahStaffProfile);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
 
                 //User account for Tom Brown - an assistant manager
@@ -458,23 +457,23 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     FirstName = "Tom",
                     LastName = "Brown"
                 };
-                if (userManager.FindByName("tomBrown@TTM.com") == null)
+                if (await userManager.FindByNameAsync("tomBrown@TTM.com") == null)
                 {
-                    userManager.Create(tom, "tbAssistant1");
-                    userManager.AddToRole(tom.Id, "Assistant Manager");
+                    EnsureIdentitySuccess(await userManager.CreateAsync(tom, "tbAssistant1"));
+                    EnsureIdentitySuccess(await userManager.AddToRoleAsync(tom, "Assistant Manager"));
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //Staff profile for Tom Brown
                 var tomStaffProfile = new StaffProfile
                 {
                     UserId = tom.Id
                 };
-                if (!context.Staff.Any(s => s.UserId == tom.Id))
+                if (!await context.Staff.AnyAsync(s => s.UserId == tom.Id))
                 {
                     context.Staff.Add(tomStaffProfile);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
 
                 //User account for Lisa Green - a stock control manager
@@ -485,23 +484,23 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     FirstName = "Lisa",
                     LastName = "Green"
                 };
-                if (userManager.FindByName("lisaGreen@TTM.com") == null)
+                if (await userManager.FindByNameAsync("lisaGreen@TTM.com") == null)
                 {
-                    userManager.Create(lisa, "lgStock1");
-                    userManager.AddToRole(lisa.Id, "Stock Control Manager");
+                    EnsureIdentitySuccess(await userManager.CreateAsync(lisa, "lgStock1"));
+                    EnsureIdentitySuccess(await userManager.AddToRoleAsync(lisa, "Stock Control Manager"));
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //Staff profile for Lisa Green
                 var lisaStaffProfile = new StaffProfile
                 {
                     UserId = lisa.Id
                 };
-                if (!(context.Staff.Any(s => s.UserId == lisa.Id)))
+                if (!(await context.Staff.AnyAsync(s => s.UserId == lisa.Id)))
                 {
                     context.Staff.Add(lisaStaffProfile);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //User account for Mark Wilson - a warehouse assistant
                 var mark = new User
@@ -511,23 +510,23 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     FirstName = "Mark",
                     LastName = "Wilson"
                 };
-                if (userManager.FindByName("markWilson@TTM.com") == null)
+                if (await userManager.FindByNameAsync("markWilson@TTM.com") == null)
                 {
-                    userManager.Create(mark, "mwWarehouse1");
-                    userManager.AddToRole(mark.Id, "Warehouse Assistant");
+                    EnsureIdentitySuccess(await userManager.CreateAsync(mark, "mwWarehouse1"));
+                    EnsureIdentitySuccess(await userManager.AddToRoleAsync(mark, "Warehouse Assistant"));
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //Staff profile for Mark Wilson
                 var markStaffProfile = new StaffProfile
                 {
                     UserId = mark.Id
                 };
-                if (!context.Staff.Any(s => s.UserId == mark.Id))
+                if (!await context.Staff.AnyAsync(s => s.UserId == mark.Id))
                 {
                     context.Staff.Add(markStaffProfile);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //User account for David Wilson - a delivery guy
                 var davidw = new User
@@ -537,23 +536,23 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     FirstName = "David",
                     LastName = "Wilson"
                 };
-                if (userManager.FindByName("davidWilson@TTM.com") == null)
+                if (await userManager.FindByNameAsync("davidWilson@TTM.com") == null)
                 {
-                    userManager.Create(davidw, "dwDelivery1");
-                    userManager.AddToRole(davidw.Id, "Delivery Guy");
+                    EnsureIdentitySuccess(await userManager.CreateAsync(davidw, "dwDelivery1"));
+                    EnsureIdentitySuccess(await userManager.AddToRoleAsync(davidw, "Delivery Guy"));
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //Staff profile for David Wilson
                 var davidwStaffProfile = new StaffProfile
                 {
                     UserId = davidw.Id
                 };
-                if (!context.Staff.Any(s => s.UserId == davidw.Id))
+                if (!await context.Staff.AnyAsync(s => s.UserId == davidw.Id))
                 {
                     context.Staff.Add(davidwStaffProfile);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //5. CREATE SOME PRODUCTS
@@ -568,11 +567,11 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     StockLevel = 50,
                     ImageUrl = "/Scalextric Car Images/C4300.jpg"
                 };
-                if (!context.Products.Any(p => p.ProductName == car1.ProductName))
+                if (!await context.Products.AnyAsync(p => p.ProductName == car1.ProductName))
                 {
                     context.Products.Add(car1);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 var car2 = new Product
                 {
@@ -583,11 +582,11 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     StockLevel = 50,
                     ImageUrl = "/Scalextric Car Images/C4655.jpg"
                 };
-                if (!(context.Products.Any(p => p.ProductName == car2.ProductName)))
+                if (!(await context.Products.AnyAsync(p => p.ProductName == car2.ProductName)))
                 {
                     context.Products.Add(car2);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 var car3 = new Product
                 {
@@ -598,11 +597,11 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     StockLevel = 67,
                     ImageUrl = "/Scalextric Car Images/C4479.jpg"
                 };
-                if (!context.Products.Any(p => p.ProductName == car3.ProductName))
+                if (!await context.Products.AnyAsync(p => p.ProductName == car3.ProductName))
                 {
                     context.Products.Add(car3);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 var car4 = new Product
                 {
@@ -613,11 +612,11 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     StockLevel = 60,
                     ImageUrl = "/Scalextric Car Images/C4635.jpg"
                 };
-                if (!context.Products.Any(p => p.ProductName == car4.ProductName))
+                if (!await context.Products.AnyAsync(p => p.ProductName == car4.ProductName))
                 {
                     context.Products.Add(car4);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 var car5 = new Product
                 {
@@ -628,11 +627,11 @@ namespace TurboTrackModels_Dotnet_Core.Models
                     StockLevel = 9,
                     ImageUrl = "/Scalextric Car Images/C4510.jpg"
                 };
-                if (!(context.Products.Any(p => p.ProductName == car5.ProductName)))
+                if (!(await context.Products.AnyAsync(p => p.ProductName == car5.ProductName)))
                 {
                     context.Products.Add(car5);
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
 
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -673,7 +672,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
 
                 //Add items to order
                 context.Orders.Add(order1);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
 
                 //Order for Sally Crow - 3 cars
@@ -717,7 +716,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
 
                 //Add everything to context
                 context.Orders.Add(order2);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
 
                 //Order for Bill Crow - 2 cars
@@ -755,7 +754,16 @@ namespace TurboTrackModels_Dotnet_Core.Models
 
                 //Add everything to context
                 context.Orders.Add(order3);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
+            }
+        }
+
+        private static void EnsureIdentitySuccess(IdentityResult result)
+        {
+            if (!result.Succeeded)
+            {
+                var errors = string.Join("; ", result.Errors.Select(error => $"{error.Code}: {error.Description}"));
+                throw new InvalidOperationException($"Database seeding failed: {errors}");
             }
         }
     }

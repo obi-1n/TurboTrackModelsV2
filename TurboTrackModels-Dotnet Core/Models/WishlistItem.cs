@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Turbo_Track_Models_Application.Models
+namespace TurboTrackModels_Dotnet_Core.Models
 {
     /// <summary>
     /// Represents an item in a user's wishlist.
