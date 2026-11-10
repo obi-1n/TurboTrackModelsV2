@@ -653,13 +653,15 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 {
                     ProductId = car1.ProductId,
                     Product = car1,
-                    Quantity = 1
+                    Quantity = 1,
+                    UnitPrice = car1.Price
                 };
                 var orderItem2 = new OrderItem
                 {
                     ProductId = car2.ProductId,
                     Product = car2,
-                    Quantity = 1
+                    Quantity = 1,
+                    UnitPrice = car2.Price
                 };
 
                 //Attach items to order
@@ -668,7 +670,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
 
                 //NOW calculate total
                 order1.TotalCost = order1.OrderItems
-                    .Sum(oi => oi.Quantity * oi.Product.Price);
+                    .Sum(oi => oi.Quantity * oi.UnitPrice);
 
                 //Add items to order
                 context.Orders.Add(order1);
@@ -690,19 +692,22 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 {
                     ProductId = car1.ProductId,
                     Product = car1,
-                    Quantity = 1
+                    Quantity = 1,
+                    UnitPrice = car1.Price
                 };
                 var orderItem4 = new OrderItem
                 {
                     ProductId = car3.ProductId,
                     Product = car3,
-                    Quantity = 1
+                    Quantity = 1,
+                    UnitPrice = car3.Price
                 };
                 var orderItem5 = new OrderItem
                 {
                     ProductId = car4.ProductId,
                     Product = car4,
-                    Quantity = 1
+                    Quantity = 1,
+                    UnitPrice = car4.Price
                 };
 
                 //Add items to order
@@ -712,7 +717,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
 
                 //Calculate total
                 order2.TotalCost = order2.OrderItems
-                    .Sum(oi => oi.Quantity * oi.Product.Price);
+                    .Sum(oi => oi.Quantity * oi.UnitPrice);
 
                 //Add everything to context
                 context.Orders.Add(order2);
@@ -735,13 +740,15 @@ namespace TurboTrackModels_Dotnet_Core.Models
                 {
                     ProductId = car5.ProductId,
                     Product = car5,
-                    Quantity = 1
+                    Quantity = 1,
+                    UnitPrice = car5.Price
                 };
                 var orderItem7 = new OrderItem
                 {
                     ProductId = car4.ProductId,
                     Product = car4,
-                    Quantity = 1
+                    Quantity = 1,
+                    UnitPrice = car4.Price
                 };
 
                 //Add items to order
@@ -750,7 +757,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
 
                 //Calculate total
                 order3.TotalCost = order3.OrderItems
-                    .Sum(oi => oi.Quantity * oi.Product.Price);
+                    .Sum(oi => oi.Quantity * oi.UnitPrice);
 
                 //Add everything to context
                 context.Orders.Add(order3);

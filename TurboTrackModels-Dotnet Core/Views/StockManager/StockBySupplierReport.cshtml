@@ -1,0 +1,103 @@
+@model TurboTrackModels_Dotnet_Core.ViewModels.StockBySupplierViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock by Supplier Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h2 { text-align: center; color: #333; }
+        .info { margin-bottom: 20px; text-align: right; font-size: 0.9em; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; margin-bottom: 30px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        .text-right { text-align: right; }
+        .btn { display: inline-block; padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: 400; line-height: 1.42857143; text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; border: 1px solid transparent; border-radius: 4px; text-decoration: none; }
+        .btn-primary { color: #fff; background-color: #337ab7; border-color: #2e6da4; }
+        .btn-success { color: #fff; background-color: #5cb85c; border-color: #4cae4c; }
+        .no-print { margin-bottom: 20px; }
+        h4 { background: #eee; padding: 10px; margin-bottom: 0; border: 1px solid #ddd; border-bottom: none; }
+    </style>
+</head>
+<body>
+    @if (ViewContext.RouteData.Values["action"] as string == "StockBySupplierReport")
+    {
+        <div class="no-print">
+            <form method="get" style="display: inline-block;">
+                <label>Filter by Supplier:</label>
+                <select asp-for="SelectedSupplier" name="supplierId" style="padding: 5px;" onchange="this.form.submit()">
+                    @if (Model.SelectedSupplier == null)
+                    {
+                        <option value="" selected>All Suppliers</option>
+                    }
+                    else
+                    {
+                        <option value="">All Suppliers</option>
+                    }
+                    @if (Model.SelectedSupplier == 1)
+                    {
+                        <option value="1" selected>Supplier 1</option>
+                    }
+                    else
+                    {
+                        <option value="1">Supplier 1</option>
+                    }
+                    @if (Model.SelectedSupplier == 2)
+                    {
+                        <option value="2" selected>Supplier 2</option>
+                    }
+                    else
+                    {
+                        <option value="2">Supplier 2</option>
+                    }
+                </select>
+                <noscript><button type="submit" class="btn btn-primary">Filter</button></noscript>
+            </form>
+            <a href="@Url.Action("DownloadStockBySupplierReportExcel", new { supplierId = Model.SelectedSupplier })" class="btn btn-success" style="margin-left: 10px;">Download Excel</a>
+            <a href="@Url.Action("Dashboard", "StockManager")" class="btn" style="background-color: #ccc; margin-left: 10px;">Back to Dashboard</a>
+        </div>
+    }
+
+    <h2>Stock by Supplier Report</h2>
+    <div class="info">
+        Generated on: @Model.GeneratedAt.ToString("f")<br />
+        Supplier Filter: @(Model.SelectedSupplier == 1 ? "Supplier 1" : Model.SelectedSupplier == 2 ? "Supplier 2" : "All Suppliers")
+    </div>
+
+    @if (!Model.Groups.Any())
+    {
+        <p style="text-align: center;">No products found for the selected filter.</p>
+    }
+    else
+    {
+        foreach (var group in Model.Groups)
+        {
+            <h4>Products</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th class="text-right">Price</th>
+                        <th class="text-right">Stock Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in group.Products)
+                    {
+                        <tr>
+                            <td>@product.ProductId</td>
+                            <td>@product.ProductName</td>
+                            <td class="text-right">@product.Price.ToString("C")</td>
+                            <td class="text-right">@product.StockLevel</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+</body>
+</html>

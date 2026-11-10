@@ -206,13 +206,15 @@ public class OrderController(
         {
             OrderDate = DateTime.UtcNow,
             TotalCost = totalAmount,
+            ShippingCost = ShippingCost,
             Status = OrderStatus.Pending,
             CustomerID = customer.CustomerID,
             StaffID = staff?.StaffId,
             OrderItems = cart.Items.Select(item => new OrderItem
             {
                 ProductId = item.ProductId,
-                Quantity = item.Quantity
+                Quantity = item.Quantity,
+                UnitPrice = decimal.Round(item.Product.Price, 2, MidpointRounding.AwayFromZero)
             }).ToList()
         };
 
@@ -228,6 +230,7 @@ public class OrderController(
             product.StockLevel -= item.Quantity;
         }
 
+        order.TotalCost = order.OrderItems.Sum(item => item.UnitPrice * item.Quantity) + order.ShippingCost;
         db.Orders.Add(order);
         await db.SaveChangesAsync();
         shoppingCart.Clear();
@@ -269,15 +272,23 @@ public class OrderController(
         foreach (var item in cart.Items)
         {
             var product = await db.Products.FindAsync(item.ProductId);
-            if (product is null || product.StockLevel < item.Quantity)
+            if (product is null)
             {
-                result.Add(product ?? new Product
+                result.Add(new Product
                 {
                     ProductId = item.ProductId,
                     ProductName = "Unavailable product",
                     StockLevel = 0
                 });
+                continue;
             }
+
+            if (product.StockLevel < item.Quantity)
+            {
+                result.Add(product);
+            }
+
+            item.Product = product;
         }
 
         return result;

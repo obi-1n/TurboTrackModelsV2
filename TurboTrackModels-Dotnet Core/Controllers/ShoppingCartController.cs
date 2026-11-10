@@ -8,7 +8,20 @@ public class ShoppingCartController(
     TTMDbContext db,
     ShoppingCartService shoppingCart) : Controller
 {
-    public IActionResult ShoppingCart() => View(shoppingCart.GetCart());
+    public async Task<IActionResult> ShoppingCart()
+    {
+        var cart = shoppingCart.GetCart();
+        foreach (var item in cart.Items)
+        {
+            var product = await db.Products.FindAsync(item.ProductId);
+            if (product is not null)
+            {
+                item.Product = product;
+            }
+        }
+
+        return View(cart);
+    }
 
     [HttpPost]
     [ValidateAntiForgeryToken]

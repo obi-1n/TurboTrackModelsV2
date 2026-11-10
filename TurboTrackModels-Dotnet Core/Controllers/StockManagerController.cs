@@ -1,4 +1,3 @@
-using ClosedXML.Excel;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,13 +26,20 @@ public class StockManagerController(TTMDbContext db) : Controller
         });
     }
 
-    public async Task<IActionResult> DownloadStockReportPdf()
+    public async Task<IActionResult> DownloadStockReportExcel()
     {
         var products = await db.Products.OrderBy(product => product.ProductId).ToListAsync();
-        var lines = new List<string> { "STOCK REPORT", $"Generated: {DateTime.Now:g}", "" };
-        lines.AddRange(products.Select(product =>
-            $"{product.ProductId} | {product.ProductName} | Stock {product.StockLevel}"));
-        return File(TextPdf.Create(lines), "application/pdf", "StockReport.pdf");
+        var rows = products.Select(product => new object?[]
+        {
+            product.ProductId,
+            product.ProductName,
+            product.Price,
+            product.StockLevel
+        });
+        return File(
+            ReportExcel.Create("Stock", ["Product ID", "Product Name", "Price", "Stock Level"], rows),
+            ReportExcel.ContentType,
+            "StockReport.xlsx");
     }
 
     public async Task<IActionResult> StockBySupplierReport(int? supplierId)
@@ -59,29 +65,16 @@ public class StockManagerController(TTMDbContext db) : Controller
     public async Task<IActionResult> DownloadStockBySupplierReportExcel(int? supplierId)
     {
         var products = await GetFilteredProductsAsync(supplierId);
-        using var workbook = new XLWorkbook();
-        var sheet = workbook.Worksheets.Add("Stock by Supplier");
-        var headers = new[] { "Product ID", "Product Name", "Price", "Stock Level" };
-        for (var index = 0; index < headers.Length; index++)
+        var rows = products.Select(product => new object?[]
         {
-            sheet.Cell(1, index + 1).Value = headers[index];
-            sheet.Cell(1, index + 1).Style.Font.Bold = true;
-        }
-
-        for (var index = 0; index < products.Count; index++)
-        {
-            var row = index + 2;
-            sheet.Cell(row, 1).Value = products[index].ProductId;
-            sheet.Cell(row, 2).Value = products[index].ProductName;
-            sheet.Cell(row, 3).Value = products[index].Price;
-            sheet.Cell(row, 4).Value = products[index].StockLevel;
-        }
-
-        sheet.Columns().AdjustToContents();
-        using var stream = new MemoryStream();
-        workbook.SaveAs(stream);
-        return File(stream.ToArray(),
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            product.ProductId,
+            product.ProductName,
+            product.Price,
+            product.StockLevel
+        });
+        return File(ReportExcel.Create("Stock by Supplier",
+                ["Product ID", "Product Name", "Price", "Stock Level"], rows),
+            ReportExcel.ContentType,
             $"StockBySupplierReport_{DateTime.Now:yyyyMMdd}.xlsx");
     }
 

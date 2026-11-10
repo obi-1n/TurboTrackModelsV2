@@ -17,11 +17,9 @@ public class CustomerController(TTMDbContext db) : Controller
             return NotFound("Customer profile not found.");
         }
 
-        var threshold = DateTime.UtcNow.AddDays(-28);
         var orders = await db.Orders
             .Where(order => order.CustomerID == customer.CustomerID &&
-                            order.OrderDate >= threshold &&
-                            order.Status == OrderStatus.Delivered)
+                            order.Status == OrderStatus.Pending)
             .OrderByDescending(order => order.OrderDate)
             .ToListAsync();
         return View(orders);
@@ -122,8 +120,13 @@ public class CustomerController(TTMDbContext db) : Controller
             return NotFound("Customer profile not found.");
         }
 
-        var order = await db.Orders.FirstOrDefaultAsync(item =>
-            item.OrderId == orderId && item.CustomerID == customer.CustomerID);
+        await using var transaction = await db.Database.BeginTransactionAsync(
+            System.Data.IsolationLevel.Serializable);
+        var order = await db.Orders
+            .Include(item => item.OrderItems)
+                .ThenInclude(item => item.Product)
+            .FirstOrDefaultAsync(item =>
+                item.OrderId == orderId && item.CustomerID == customer.CustomerID);
         if (order is null)
         {
             return NotFound("Order not found.");
@@ -131,12 +134,19 @@ public class CustomerController(TTMDbContext db) : Controller
 
         if (order.Status == OrderStatus.Pending)
         {
+            foreach (var item in order.OrderItems)
+            {
+                item.Product.StockLevel += item.Quantity;
+            }
+
             order.Status = OrderStatus.Cancelled;
             await db.SaveChangesAsync();
+            await transaction.CommitAsync();
             TempData["SuccessMessage"] = $"Order #{orderId} has been cancelled successfully.";
         }
         else
         {
+            await transaction.RollbackAsync();
             TempData["ErrorMessage"] = $"Order #{orderId} cannot be cancelled as it is already being processed.";
         }
 
@@ -163,22 +173,7 @@ public class CustomerController(TTMDbContext db) : Controller
             return NotFound("Order not found.");
         }
 
-        var lines = new List<string>
-        {
-            "TURBO TRACK MODELS - INVOICE",
-            $"Order ID: {order.OrderId}",
-            $"Date: {order.OrderDate:dd MMMM yyyy}",
-            $"Customer: {order.Customer.User.FirstName} {order.Customer.User.LastName}",
-            $"Email: {order.Customer.User.Email}",
-            $"Address: {order.Customer.Street}, {order.Customer.Town}, {order.Customer.PostCode}",
-            "",
-            "Items:"
-        };
-        lines.AddRange(order.OrderItems.Select(item =>
-            $"{item.Product.ProductName} | Qty {item.Quantity} | GBP {item.Product.Price:F2} | GBP {item.Quantity * item.Product.Price:F2}"));
-        lines.Add($"Order total: GBP {order.TotalCost:F2}");
-
-        return File(TextPdf.Create(lines), "application/pdf", $"Invoice_{order.OrderId}.pdf");
+        return File(InvoicePdf.Create(order), "application/pdf", $"Invoice_{order.OrderId}.pdf");
     }
 
     private Task<CustomerProfile?> GetCurrentCustomerAsync()

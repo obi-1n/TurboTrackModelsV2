@@ -1,0 +1,56 @@
+@model List<TurboTrackModels_Dotnet_Core.Models.Order>
+
+@{
+    ViewBag.Title = "Pending Orders";
+}
+
+<div class="container mt-5">
+    <h2>Pending Orders</h2>
+    <p class="text-muted">Review or cancel your orders that have not yet been processed.</p>
+
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="alert alert-info">
+            <p>You have no pending orders.</p>
+            <a href="@Url.Action("OrderHistory", "Customer")" class="btn btn-primary">View Order History</a>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Order Date</th>
+                        <th>Status</th>
+                        <th>Total Cost</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model)
+                    {
+                        <tr>
+                            <td><strong>#@order.OrderId</strong></td>
+                            <td>@order.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>
+                                <span class="badge bg-secondary">@order.Status</span>
+                            </td>
+                            <td>&pound;@order.TotalCost.ToString("F2")</td>
+                            <td>
+                                <form asp-controller="Customer" asp-action="CancelOrder"
+                                      asp-route-orderId="@order.OrderId" method="post">
+                                    <button type="submit" class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Cancel order #@order.OrderId? The items will be returned to stock.')">
+                                        Cancel Order
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

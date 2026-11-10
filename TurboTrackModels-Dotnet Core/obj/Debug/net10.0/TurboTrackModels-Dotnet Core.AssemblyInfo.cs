@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("4414d4f8-bf72-47ac-81ad-f04472faee7d")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("TurboTrackModels-Dotnet Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d2d54779a8ef20baff922f609a0903637325d732")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f01ceff6db4472145504a68999ddbc5ccf8b5268")]
 [assembly: System.Reflection.AssemblyProductAttribute("TurboTrackModels-Dotnet Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TurboTrackModels-Dotnet Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,0 +1,37 @@
+@using Microsoft.AspNetCore.Identity
+@using TurboTrackModels_Dotnet_Core.Models
+@inject UserManager<User> UserManager
+
+@{
+    var signedIn = User.Identity?.IsAuthenticated == true;
+    var displayName = User.Identity?.Name ?? "Account";
+    if (signedIn)
+    {
+        var user = await UserManager.GetUserAsync(User);
+        if (!string.IsNullOrWhiteSpace(user?.FirstName))
+        {
+            displayName = user.FirstName;
+        }
+    }
+}
+
+@if (signedIn)
+{
+    <ul class="navbar-nav navbar-right">
+        <li>
+            <a asp-controller="Manage" asp-action="Index" title="Manage" class="nav-link">Hi @displayName!</a>
+        </li>
+        <li>
+            <form asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
+                <button type="submit" class="nav-link btn btn-link">Log off</button>
+            </form>
+        </li>
+    </ul>
+}
+else
+{
+    <ul class="navbar-nav navbar-right">
+        <li><a asp-controller="Account" asp-action="Register" id="registerLink" class="nav-link">Register</a></li>
+        <li><a asp-controller="Account" asp-action="Login" id="loginLink" class="nav-link">Log in</a></li>
+    </ul>
+}

@@ -1,0 +1,155 @@
+﻿@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<style>
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 70vh;
+        padding-top: 50px;
+    }
+
+    .login-card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        padding: 40px;
+        width: 100%;
+        max-width: 450px;
+    }
+
+    .login-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .login-header h2 {
+        color: #333 !important;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .login-header p {
+        color: #666;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        padding: 12px;
+        height: auto;
+        max-width: 100% !important;
+    }
+
+    .btn-login {
+        background-color: #f72f35;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-weight: 600;
+        padding: 12px;
+        width: 100%;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-login:hover {
+        background-color: #d6282d;
+        color: white;
+    }
+
+    .login-footer {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 0.9em;
+    }
+
+    .login-footer a {
+        color: #f72f35;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .login-footer a:hover {
+        text-decoration: underline;
+    }
+
+    .checkbox-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .checkbox-container input {
+        margin-right: 10px;
+        width: auto !important;
+    }
+
+    .checkbox-container label {
+        margin-bottom: 0;
+    }
+
+    .text-danger ul {
+        list-style: none;
+        padding: 0;
+    }
+</style>
+
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <h2>@ViewBag.Title</h2>
+            <p>Welcome back! Please login to your account.</p>
+        </div>
+
+        <section id="loginForm">
+            <form asp-controller="Account" asp-action="Login"
+                  asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" role="form">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email)
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Enter your email" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter your password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="checkbox-container">
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe)
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-login">LOG IN</button>
+                </div>
+
+                <div class="login-footer">
+                    <p>Don't have an account? @Html.ActionLink("Register here", "Register")</p>
+                    @* Enable this once you have account confirmation enabled for password reset functionality
+                    <p>@Html.ActionLink("Forgot your password?", "ForgotPassword")</p>*@
+                </div>
+            </form>
+        </section>
+
+        <hr />
+        <section id="socialLoginForm">
+            <partial name="_ExternalLoginsListPartial"
+                     model="@(new ExternalLoginListViewModel { ReturnUrl = ViewData["ReturnUrl"] as string })" />
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

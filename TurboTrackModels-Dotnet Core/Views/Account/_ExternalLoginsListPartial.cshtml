@@ -1,0 +1,28 @@
+﻿@model ExternalLoginListViewModel
+@inject Microsoft.AspNetCore.Authentication.IAuthenticationSchemeProvider SchemeProvider
+
+<h4>Use another service to log in.</h4>
+<hr />
+@{
+    var loginProviders = (await SchemeProvider.GetAllSchemesAsync())
+        .Where(scheme => !string.IsNullOrWhiteSpace(scheme.DisplayName))
+        .ToList();
+    if (loginProviders.Count == 0) {
+        <div>
+            <p>
+                There are no external authentication services configured.
+            </p>
+        </div>
+    }
+    else {
+        <form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div id="socialLoginList" class="d-flex gap-2">
+                @foreach (var provider in loginProviders) {
+                    <button type="submit" class="btn btn-outline-dark" name="provider" value="@provider.Name">
+                        Log in with @provider.DisplayName
+                    </button>
+                }
+            </div>
+        </form>
+    }
+}

@@ -1,8 +1,225 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model List<TurboTrackModels_Dotnet_Core.Models.Product>
+@{
+    ViewBag.Title = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    .hero-section {
+        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('@Url.Content("~/Content/hero-bg.jpg")'); /* Fallback to color if image missing */
+        background-color: #333;
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 80px 0;
+        text-align: center;
+        border-radius: 15px;
+        margin-bottom: 40px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .hero-section h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 15px;
+        color: white !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .hero-section p {
+        font-size: 1.2rem;
+        max-width: 700px;
+        margin: 0 auto 25px;
+        opacity: 0.9;
+    }
+
+    .product-card {
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: #fff;
+    }
+
+    .product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+    }
+
+    .product-image-container {
+        height: 250px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .product-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .product-card:hover .product-image-container img {
+        transform: scale(1.1);
+    }
+
+    .price-tag {
+        font-size: 1.4rem;
+        color: #f72f35;
+        font-weight: 700;
+    }
+
+    .btn-add-cart {
+        background-color: #f72f35;
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 10px 15px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-add-cart:hover {
+        background-color: #d6282d;
+        color: white;
+    }
+
+    .btn-wishlist {
+        border: 1px solid #ddd;
+        color: #666;
+        transition: all 0.3s;
+    }
+
+    .btn-wishlist:hover {
+        background-color: #f8f9fa;
+        color: #f72f35;
+        border-color: #f72f35;
+    }
+
+    .stock-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        z-index: 10;
+    }
+
+    .badge-high-stock { background-color: rgba(40, 167, 69, 0.9); color: white; }
+    .badge-low-stock { background-color: rgba(255, 193, 7, 0.9); color: #212529; }
+    .badge-out-stock { background-color: rgba(220, 53, 69, 0.9); color: white; }
+
+    .section-title {
+        color: white !important;
+        font-weight: 700;
+        margin-bottom: 30px;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background-color: #fff;
+    }
+</style>
+
+<div class="hero-section">
+    <div class="container">
+        <h1>Turbo Track Models</h1>
+        <p>Premium Scalextric cars and accessories for the ultimate racing experience. Discover our exclusive collection of high-performance models.</p>
+    </div>
+</div>
+
+<div class="container">
+    <h2 class="section-title">Featured Products</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="text-center p-5 bg-white rounded shadow-sm">
+            <p class="mb-0">No products available at the moment. Please check back later!</p>
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            @foreach (var car in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm product-card">
+                        <div class="product-image-container">
+                            @if (car.StockLevel > 20)
+                            {
+                                <span class="stock-badge badge-high-stock">In Stock</span>
+                            }
+                            else if (car.StockLevel < 1)
+                            {
+                                <span class="stock-badge badge-out-stock">Out of Stock</span>
+                            }
+                            else
+                            {
+                                <span class="stock-badge badge-low-stock">Only @car.StockLevel Left</span>
+                            }
+
+                            @if (!string.IsNullOrEmpty(car.ImageUrl))
+                            {
+                                <img src="@Url.Content(car.ImageUrl)" alt="@car.ProductName" />
+                            }
+                            else
+                            {
+                                <div class="d-flex align-items-center justify-content-center h-100 bg-light">
+                                    <span class="text-muted">No Image Available</span>
+                                </div>
+                            }
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold text-dark mb-2">@car.ProductName</h5>
+
+                            <p class="card-text text-muted small mb-3">
+                                @if (car.Description != null && car.Description.Length > 100)
+                                {
+                                    @car.Description.Substring(0, 100)<text>...</text>
+                                }
+                                else
+                                {
+                                    @car.Description
+                                }
+                            </p>
+
+                            <div class="mt-auto">
+                                <p class="price-tag mb-3">
+                                    &pound;@car.Price.ToString("F2")
+                                </p>
+
+                                <div class="d-flex gap-2">
+                                    @using (Html.BeginForm("Add", "ShoppingCart", FormMethod.Post, new { @class = "flex-grow-1" }))
+                                    {
+                                        @Html.Hidden("id", car.ProductId)
+                                        <button type="submit" class="btn btn-add-cart w-100 rounded-pill">
+                                            <i class="bi bi-cart-plus"></i> Add to Cart
+                                        </button>
+                                    }
+
+                                    @if (User.Identity?.IsAuthenticated == true && User.IsInRole("Customer"))
+                                    {
+                                        <form asp-controller="Wishlist" asp-action="Add" method="post">
+                                            <input type="hidden" name="productId" value="@car.ProductId" />
+                                            <button type="submit" class="btn btn-wishlist rounded-circle" title="Add to Wishlist" style="width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;">
+                                                ♡
+                                            </button>
+                                        </form>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
 </div>

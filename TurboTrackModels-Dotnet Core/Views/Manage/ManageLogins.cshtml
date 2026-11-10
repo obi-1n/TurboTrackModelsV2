@@ -1,0 +1,58 @@
+﻿@model ManageLoginsViewModel
+@{
+    ViewBag.Title = "Manage your external logins";
+}
+
+<main aria-labelledby="title">
+<h2 id="title">@ViewBag.Title.</h2>
+
+    <p class="text-success">@Model.StatusMessage</p>
+    @{
+        if (Model.CurrentLogins.Count == 0 && Model.OtherLogins.Count == 0) {
+            <div>
+                <p>
+                    No external authentication providers are configured or linked.
+                </p>
+            </div>
+        }
+        else
+        {
+            if (Model.CurrentLogins.Count > 0)
+            {
+                <h4>Registered Logins</h4>
+                <table class="table">
+                    <tbody>
+                        @foreach (var account in Model.CurrentLogins)
+                        {
+                            <tr>
+                                <td>@account.LoginProvider</td>
+                                <td>
+                                    <form asp-controller="Manage" asp-action="RemoveLogin" method="post">
+                                        <input type="hidden" name="loginProvider" value="@account.LoginProvider" />
+                                        <input type="hidden" name="providerKey" value="@account.ProviderKey" />
+                                        <button type="submit" class="btn btn-outline-dark">Remove</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            if (Model.OtherLogins.Count > 0)
+            {
+                <form asp-controller="Manage" asp-action="LinkLogin" method="post">
+                    <div id="socialLoginList">
+                    <p>
+                        @foreach (var provider in Model.OtherLogins)
+                        {
+                            <button type="submit" class="btn btn-outline-dark" name="provider" value="@provider.Name">
+                                Link @provider.DisplayName
+                            </button>
+                        }
+                    </p>
+                    </div>
+                </form>
+            }
+        }
+    }
+</main>

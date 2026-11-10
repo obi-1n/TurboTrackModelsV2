@@ -1,0 +1,166 @@
+﻿@* Shopping Cart View - Displays cart items and payment summary *@
+@model TurboTrackModels_Dotnet_Core.Models.ShoppingCart
+@{
+    ViewBag.Title = "Shopping Cart";
+    var shippingCost = 4.00m; @* Fixed shipping cost in pounds *@
+    var totalWithShipping = Model.TotalCost + shippingCost; @* Calculate total including shipping *@
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/Content/cart.css" />
+}
+
+@* Font Awesome icon library for UI icons *@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+<div class="cart-container">
+    <div class="container">
+        <div class="cart-card">
+            <div class="row">
+                @* Left Column - Shopping Cart Items Section *@
+                <div class="col-lg-7 cart-main">
+                    @* Continue Shopping Button *@
+                    <a href="@Url.Action("Index", "Home")" class="shopping-continue">
+                        <i class="fas fa-chevron-left me-2"></i> Continue Shopping
+                    </a>
+
+                    <hr class="my-4">
+
+                    @* Cart Header with Item Count *@
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h3 class="mb-1">Shopping cart</h3>
+                            @*Saying "1 Orders didnt sound right so made an if statement to fix that"*@
+                            @if (Model.Items.Count == 1)
+                            {
+                                <p class="mb-0 text-muted small">You have @Model.Items.Sum(i => i.Quantity) item in your cart</p>
+                            }
+                            else
+                            {
+                                <p class="mb-0 text-muted small">You have @Model.Items.Sum(i => i.Quantity) items in your cart</p>
+                            }
+                        </div>
+                    </div>
+
+                    @* Loop through cart items *@
+                    @foreach (var item in Model.Items)
+                    {
+                        <div class="cart-item">
+                            <div class="d-flex align-items-center flex-grow-1">
+                                @* Product Image *@
+                                @if (!string.IsNullOrEmpty(item.Product.ImageUrl))
+                                {
+                                    <img src="@Url.Content(item.Product.ImageUrl)" class="cart-item-img" alt="@item.Product.ProductName">
+                                }
+                                @* Product Information *@
+                                <div class="cart-item-info">
+                                    <div class="cart-item-title">@item.Product.ProductName</div>
+                                    <div class="cart-item-desc">
+                                        @* Display truncated description (50 characters max) *@
+                                        @if (item.Product.Description != null && item.Product.Description.Length > 50)
+                                        {
+                                            @item.Product.Description.Substring(0, 50) <text>...</text>
+                                        }
+                                        else
+                                        {
+                                            @item.Product.Description
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center">
+                                @* Quantity Control - Up/Down Buttons *@
+                                <div class="quantity-control me-4">
+                                    <span class="fw-bold me-2">@item.Quantity</span>
+                                    <div class="d-flex flex-column">
+                                        <form asp-controller="ShoppingCart" asp-action="UpdateQuantity"
+                                              asp-route-id="@item.ProductId" asp-route-change="1" method="post"
+                                              class="quantity-update-form">
+                                            <button type="submit" class="quantity-btn text-dark small"
+                                                    aria-label="Increase @item.Product.ProductName quantity">
+                                                <i class="fas fa-chevron-up"></i>
+                                            </button>
+                                        </form>
+                                        <form asp-controller="ShoppingCart" asp-action="UpdateQuantity"
+                                              asp-route-id="@item.ProductId" asp-route-change="-1" method="post"
+                                              class="quantity-update-form">
+                                            <button type="submit" class="quantity-btn text-dark small"
+                                                    aria-label="Decrease @item.Product.ProductName quantity">
+                                                <i class="fas fa-chevron-down"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                @* Product Price in Pounds *@
+                                <div class="fw-bold me-4" style="min-width: 80px; text-align: right;">
+                                    &pound;@item.Product.Price.ToString("N2")
+                                </div>
+
+                                @* Remove Item Button *@
+                                <form asp-controller="ShoppingCart" asp-action="Remove"
+                                      asp-route-id="@item.ProductId" method="post" class="remove-item-form">
+                                    <button type="submit" class="remove-btn"
+                                            aria-label="Remove @item.Product.ProductName from cart">
+                                        <i class="fas fa-trash-can"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                @* Right Column - Payment & Order Summary *@
+                <div class="col-lg-5 cart-sidebar">
+                    <div class="cart-sidebar-inner">
+                        @* Card Details Header *@
+                        <div class="card-details-title">
+                            <span>Card Details</span>
+                        </div>
+
+                        @* Stripe Payment branding and icons *@
+                        <p class="small mb-2">Secure Payment with Stripe</p>
+                        <div class="card-type-icons">
+                            <div class="card-type-icon"><i class="fab fa-cc-stripe fa-2x"></i></div>
+                            <div class="card-type-icon"><i class="fab fa-cc-visa fa-2x"></i></div>
+                            <div class="card-type-icon"><i class="fab fa-cc-mastercard fa-2x"></i></div>
+                            <div class="card-type-icon"><i class="fab fa-cc-amex fa-2x"></i></div>
+                        </div>
+
+                        @* Informational alert about the secure checkout process *@
+                        <div class="alert alert-dark small">
+                            Click checkout below to securely enter your payment details and complete your order.
+                        </div>
+
+                        <hr class="my-4">
+
+                        @* Order Summary *@
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span>&pound;@Model.TotalCost.ToString("N2")</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span>&pound;@shippingCost.ToString("N2")</span>
+                        </div>
+                        <div class="summary-row fw-bold mt-2">
+                            <span>Total (Tax incl.)</span>
+                            <span>&pound;@totalWithShipping.ToString("N2")</span>
+                        </div>
+
+                        @* Checkout Button - Redirects to the address page before proceeding to payment *@
+                        @*Checkout button should only be displayed if there are items in the cart*@
+                        @if (Model.Items.Count > 0)
+                        {
+                            <a href="@Url.Action("Address", "Order")" class="checkout-btn">
+                                <span>&pound;@totalWithShipping.ToString("N2")</span>
+                                <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

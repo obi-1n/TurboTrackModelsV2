@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<div class="container mt-4">
+    <h2 class=" text-center">Admin Dashboard</h2>
+    <hr />
+    <div class="row justify-content-center">
+        @*Display dashboard cards*@
+        @*View Staff Card*@
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">View Staff</h5>
+                    <p class="card-text">Displays a list of all staff members in the system and their roles.</p>
+                    @Html.ActionLink("View Staff info", "StaffList", "Admin", null, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+        </div>
+
+        @*Add new staff Member*@
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Add New Staff Member</h5>
+                    <p class="card-text">Takes the admin to the form for adding new staff members and managing their roles.</p>
+                    @Html.ActionLink("Add Staff", "AddStaff", "Admin", null, new { @class = "btn btn-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -221,3 +221,14 @@
 /Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/RBush.dll
 /Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/SixLabors.Fonts.dll
 /Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/System.IO.Packaging.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Syncfusion.Compression.Portable.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Syncfusion.Licensing.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Syncfusion.Pdf.Portable.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Syncfusion.Telemetry.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Scalextric Car Images/C4300.jpg
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Scalextric Car Images/C4479.jpg
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Scalextric Car Images/C4510.jpg
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Scalextric Car Images/C4635.jpg
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Scalextric Car Images/C4655.jpg
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Scalextric Car Images/C4669.jpg
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Scalextric Car Images/Screenshot 2026-05-26 162128.png

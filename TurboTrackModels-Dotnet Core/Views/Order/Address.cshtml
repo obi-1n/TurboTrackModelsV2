@@ -1,0 +1,145 @@
+@model TurboTrackModels_Dotnet_Core.ViewModels.AddressViewModel
+@{
+    ViewBag.Title = "Shipping Address";
+}
+
+<style>
+    .address-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 70vh;
+        padding: 40px 0;
+    }
+
+    .address-card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        padding: 40px;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .address-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .address-header h2 {
+        color: #f72f35 !important;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .address-header p {
+        color: #666;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        padding: 12px;
+        height: auto;
+        max-width: 100% !important;
+    }
+
+    .btn-checkout {
+        background-color: #f72f35;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-weight: 600;
+        padding: 12px;
+        width: 100%;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-checkout:hover {
+        background-color: #d6282d;
+        color: white;
+    }
+
+    .btn-back {
+        background-color: transparent;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        color: #666;
+        font-weight: 600;
+        padding: 12px;
+        width: 100%;
+        margin-top: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-back:hover {
+        background-color: #f8f9fa;
+        color: #333;
+    }
+
+    .form-row {
+        display: flex;
+        gap: 15px;
+    }
+
+    .form-row .form-group {
+        flex: 1;
+    }
+
+    .text-danger ul {
+        list-style: none;
+        padding: 0;
+    }
+</style>
+
+<div class="address-container">
+    <div class="address-card">
+        <div class="address-header">
+            <h2>@ViewBag.Title</h2>
+            <p>Please provide your shipping details.</p>
+        </div>
+
+        @using (Html.BeginForm("Address", "Order", FormMethod.Post, new { role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Street)
+                @Html.TextBoxFor(m => m.Street, new { @class = "form-control", placeholder = "Street Address" })
+                @Html.ValidationMessageFor(m => m.Street, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Town)
+                    @Html.TextBoxFor(m => m.Town, new { @class = "form-control", placeholder = "Town/City" })
+                    @Html.ValidationMessageFor(m => m.Town, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.PostCode)
+                    @Html.TextBoxFor(m => m.PostCode, new { @class = "form-control", placeholder = "Postcode" })
+                    @Html.ValidationMessageFor(m => m.PostCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.PhoneNumber)
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", placeholder = "Phone Number" })
+                @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group mt-4">
+                <button type="submit" class="btn btn-checkout">CONTINUE TO CHECKOUT</button>
+                <a href="@Url.Action("ShoppingCart", "ShoppingCart")" class="btn btn-back">BACK TO CART</a>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,65 @@
+@model List<TurboTrackModels_Dotnet_Core.Models.Order>
+
+@{
+    ViewBag.Title = "Manage Returns";
+}
+
+<div class="container mt-5">
+    <h2>Manage Return Requests</h2>
+    <p class="text-muted">Review and process orders that have been requested for return.</p>
+
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="alert alert-info">
+            <p>No pending return requests found.</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Order Date</th>
+                        <th>Return Reason</th>
+                        <th>Total Cost</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model)
+                    {
+                        <tr>
+                            <td><strong>#@order.OrderId</strong></td>
+                            <td>
+                                @if (order.Customer != null && order.Customer.User != null)
+                                {
+                                    @order.Customer.User.Email
+                                }
+                                else
+                                {
+                                    <span class="text-muted">N/A</span>
+                                }
+                            </td>
+                            <td>@order.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>
+                                <div style="max-width: 300px; white-space: pre-wrap;">@order.ReturnReason</div>
+                            </td>
+                            <td>&pound;@order.TotalCost.ToString("F2")</td>
+                            <td>
+                                <form asp-controller="AssistantManager" asp-action="MarkAsReturned"
+                                      asp-route-orderId="@order.OrderId" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Are you sure you want to mark this order as returned?')">
+                                        Mark as Returned
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

@@ -13,7 +13,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
         public string ProductId { get; set; } = string.Empty;
         public Product Product { get; set; } = null!;
 
-        //Order total cost
         public int Quantity { get; set; }
+        public decimal UnitPrice { get; set; }
     }
 }

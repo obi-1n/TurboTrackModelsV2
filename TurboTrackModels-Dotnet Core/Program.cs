@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using TurboTrackModels_Dotnet_Core.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,6 +50,18 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(app.Environment.ContentRootPath, "Content")),
+    RequestPath = "/Content"
+});
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(app.Environment.ContentRootPath, "Scalextric Car Images")),
+    RequestPath = "/Scalextric Car Images"
+});
 app.UseRouting();
 
 app.UseSession();

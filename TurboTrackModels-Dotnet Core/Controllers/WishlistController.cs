@@ -5,7 +5,7 @@ using TurboTrackModels_Dotnet_Core.Models;
 
 namespace TurboTrackModels_Dotnet_Core.Controllers;
 
-[Authorize]
+[Authorize(Roles = "Customer")]
 public class WishlistController(TTMDbContext db) : Controller
 {
     public async Task<IActionResult> Index()

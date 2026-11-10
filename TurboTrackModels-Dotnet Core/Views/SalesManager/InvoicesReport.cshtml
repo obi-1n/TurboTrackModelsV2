@@ -1,0 +1,88 @@
+@model TurboTrackModels_Dotnet_Core.ViewModels.InvoicesViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoices Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h2 { text-align: center; color: #333; }
+        .info { margin-bottom: 20px; text-align: right; font-size: 0.9em; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        .text-right { text-align: right; }
+        .total-row { font-weight: bold; background-color: #eee; }
+        .btn { display: inline-block; padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: 400; line-height: 1.42857143; text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; border: 1px solid transparent; border-radius: 4px; text-decoration: none; }
+        .btn-primary { color: #fff; background-color: #337ab7; border-color: #2e6da4; }
+        .no-print { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    @if (ViewContext.RouteData.Values["action"] as string == "InvoicesReport")
+    {
+        <div class="no-print">
+            <form method="get" style="display: inline-block; margin-bottom: 10px;">
+                <label>Date:</label>
+                <input type="date" name="filterDate" value="@(Model.FilterDate?.ToString("yyyy-MM-dd"))" style="padding: 5px;" />
+                <label style="margin-left: 10px;">Username:</label>
+                <input type="text" name="filterUsername" value="@Model.FilterUsername" placeholder="Search username..." style="padding: 5px;" />
+                <button type="submit" class="btn btn-primary">Filter</button>
+                <a href="@Url.Action("InvoicesReport")" class="btn" style="background-color: #ccc;">Clear</a>
+            </form>
+            <div style="margin-top: 10px;">
+                <a asp-controller="SalesManager" asp-action="DownloadInvoicesReportExcel"
+                   asp-route-filterDate="@Model.FilterDate" asp-route-filterUsername="@Model.FilterUsername"
+                   class="btn btn-primary">Download Excel</a>
+                <a href="@Url.Action("Dashboard", "SalesManager")" class="btn" style="background-color: #ccc;">Back to Dashboard</a>
+            </div>
+        </div>
+    }
+
+    <h2>Invoices Report</h2>
+    <div class="info">
+        Generated on: @Model.GeneratedAt.ToString("f")<br />
+        @if (Model.FilterDate.HasValue)
+        {
+            <span>Filter Date: @Model.FilterDate.Value.ToShortDateString()</span><br />
+        }
+        @if (!string.IsNullOrEmpty(Model.FilterUsername))
+        {
+            <span>Filter Username: @Model.FilterUsername</span><br />
+        }
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Invoice No</th>
+                <th>Date of Invoice</th>
+                <th>Customer Id</th>
+                <th>Customer Name</th>
+                <th class="text-right">Invoice Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.Orders)
+            {
+                <tr>
+                    <td>@order.OrderId</td>
+                    <td>@order.OrderDate.ToShortDateString()</td>
+                    <td>@order.CustomerID</td>
+                    <td>@(order.Customer?.User?.FirstName ?? "N/A")</td>
+                    <td class="text-right">@order.TotalCost.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr class="total-row">
+                <td colspan="4" class="text-right">Overall Total:</td>
+                <td class="text-right">@Model.TotalAmount.ToString("C")</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>

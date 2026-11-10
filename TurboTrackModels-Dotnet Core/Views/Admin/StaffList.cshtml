@@ -1,0 +1,49 @@
+@model IEnumerable<TurboTrackModels_Dotnet_Core.ViewModels.StaffListViewModel>
+@{
+    ViewBag.Title = "Staff Management";
+}
+
+<h2 class="text-center">Manage Staff</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<p>
+    @Html.ActionLink("Add New Staff", "AddStaff", "Admin", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.FirstName</td>
+            <td>@item.LastName</td>
+            <td>@item.UserName</td>
+            <td>@item.Role</td>
+            <td>
+                @using (Html.BeginForm("DeleteStaff", "Admin", new { id = item.Id }, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this staff member?');">Delete</button>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

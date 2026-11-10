@@ -1,0 +1,271 @@
+@model List<TurboTrackModels_Dotnet_Core.Models.Order>
+
+@{
+    ViewBag.Title = "Order History";
+}
+
+<div class="container mt-5">
+    <h2>Your Order History</h2>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @* 
+        EMPTY STATE CHECK
+        Conditional rendering: If the model is null OR contains no orders,
+        display a message encouraging the user to continue shopping.
+        This prevents displaying an empty table and provides a better UX.
+    *@
+    @if (Model == null || Model.Count == 0)
+    {
+        <!-- Bootstrap alert component with info styling (blue background) -->
+        <div class="alert alert-info">
+            <p>You haven't placed any orders yet.</p>
+            @* 
+                Navigation link using Razor URL helper to generate URL to Home controller's Index action.
+                Provides a pathway for users with no orders to explore products.
+            *@
+            <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Continue Shopping</a>
+        </div>
+    }
+    else
+    {
+        @* 
+            DATA DISPLAY SECTION
+            Display responsive table with all customer orders.
+            The table-responsive wrapper ensures the table is scrollable on mobile devices
+            rather than breaking the layout.
+        *@
+        <div class="table-responsive">
+            <!-- Bootstrap table with striped rows and hover effect for better UX -->
+            <table class="table table-striped table-hover">
+                
+                <!-- TABLE HEADER -->
+                <!-- Dark header (table-dark class) for visual distinction and readability -->
+                <thead class="table-dark">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Order Date</th>
+                        <th>Status</th>
+                        <th>Total Cost</th>
+                        <th>Items</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <!-- TABLE BODY -->
+                <!-- Loop through each order in the model list passed from the controller -->
+                <tbody>
+                    @foreach (var order in Model)
+                    {
+                        @* 
+                            ORDER SUMMARY ROW
+
+                        *@
+                        <tr>
+                            <!-- Order ID: Display with # prefix for visual clarity (wrapped in <strong> for emphasis) -->
+                            <td><strong>#@order.OrderId</strong></td>
+                            
+                            @* 
+                                Order Date: Format the DateTime to display in UK format
+                                Format string "dd/MM/yyyy HH:mm" produces: "25/12/2024 14:30"
+                                ToString() method converts the DateTime object to a formatted string.
+                            *@
+                            <td>@order.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                            
+                            @* 
+                                Order Status: Display with color-coded badges for quick status identification
+                                Switch statement evaluates the order status (enum converted to string)
+                                and assigns appropriate Bootstrap badge class for visual feedback:
+                                - Pending = Warning (yellow) - order awaiting processing
+                                - Processing = Info (light blue) - order being prepared
+                                - Shipped = Primary (blue) - order in transit
+                                - Delivered = Success (green) - order received
+                                - Cancelled = Danger (red) - order cancelled
+                            *@
+                            <td>
+                                @switch (order.Status.ToString())
+                                {
+                                    case "Pending":
+                                        <span class="badge bg-warning text-dark">Pending</span>
+                                        break;
+                                    case "Processing":
+                                        <span class="badge bg-info">Processing</span>
+                                        break;
+                                    case "Shipped":
+                                        <span class="badge bg-primary">Shipped</span>
+                                        break;
+                                    case "Delivered":
+                                        <span class="badge bg-success">Delivered</span>
+                                        break;
+                                    case "ReturnRequested":
+                                        <span class="badge bg-warning">Return Requested</span>
+                                        break;
+                                    case "Returned":
+                                        <span class="badge bg-secondary">Returned</span>
+                                        break;
+                                    case "Cancelled":
+                                        <span class="badge bg-danger">Cancelled</span>
+                                        break;
+                                }
+                            </td>
+                            
+                            @* 
+                                Total Cost: Display the order total with:
+                                - Pound symbol (£) for UK currency
+                                - ToString("F2") format specifier ensures exactly 2 decimal places (e.g., "99.99")
+                                - Comma separated for thousands (e.g., "1,234.56")
+                            *@
+                            <td>&pound;@order.TotalCost.ToString("F2")</td>
+                            
+                            @* 
+                                Item Count: Show number of distinct items in the order
+                                Uses OrderItems.Count to display how many line items are in this order
+                            *@
+                            <td>@order.OrderItems.Count item(s)</td>
+                            
+                            @* 
+                                ACTION BUTTONS
+                                Contains two action buttons:
+                                1. View Details button - toggles the collapsible order items section
+                                2. Download Invoice button - initiates invoice PDF download
+                                Buttons are grouped in a button group for better visual layout
+                            *@
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Order actions">
+                                    <!-- View Details Button: Toggle collapse to show/hide order items -->
+                                    <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#order-@order.OrderId" aria-expanded="false" title="View order items">
+                                        View Details
+                                    </button>
+                                    
+                                    @* 
+                                        Download Invoice Button
+                                    *@
+                                    <a href="@Url.Action("DownloadInvoice", "Customer", new { orderId = order.OrderId })" 
+                                       class="btn btn-sm btn-outline-success" 
+                                       title="Download invoice as PDF">
+                                        <i class="fas fa-file-invoice-dollar"></i> Invoice
+                                    </a>
+
+                                    @if (order.Status == TurboTrackModels_Dotnet_Core.Models.OrderStatus.Pending)
+                                    {
+                                        <form asp-controller="Customer" asp-action="CancelOrder"
+                                              asp-route-orderId="@order.OrderId" method="post" style="display:inline;">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Cancel Order" onclick="return confirm('Are you sure you want to cancel order #@order.OrderId?')">
+                                                <i class="fas fa-times-circle"></i> Cancel
+                                            </button>
+                                        </form>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+
+                        @* 
+                            COLLAPSIBLE DETAILS ROW
+                            Hidden by default and expands when "View Details" button is clicked.
+                        *@
+                        <tr>
+                            <td colspan="6">
+                                @*Collapsible Container*@
+                                <div class="collapse" id="order-@order.OrderId">
+                                    <!-- Card styling provides visual containment and separation -->
+                                    <div class="card card-body">
+                                        <h6>Order Items:</h6>
+                                        
+                                        @* 
+                                            NESTED TABLE: Order Line Items Detail
+                                            Displays each product in the order with individual pricing.
+                                        *@
+                                        <table class="table table-sm">
+                                            <!-- Header row for line items table -->
+                                            <thead>
+                                                <tr>
+                                                    <th>Product</th>
+                                                    <th>Quantity</th>
+                                                    <th>Unit Price</th>
+                                                    <th>Subtotal</th>
+                                                </tr>
+                                            </thead>
+                                            
+                                            <!-- Loop through each item in the current order's OrderItems collection -->
+                                            <tbody>
+                                                @foreach (var item in order.OrderItems)
+                                                {
+                                                    <tr>
+                                                        @*Product Name*@
+                                                        <td>@item.Product.ProductName</td>
+                                                        
+                                                        <!-- Quantity: How many units of this product were ordered -->
+                                                        <td>@item.Quantity</td>
+                                                        
+                                                        @*Unit Price*@
+                                                        <td>&pound;@item.UnitPrice.ToString("F2")</td>
+                                                        
+                                                        @* 
+                                                            Subtotal: Line item total (Quantity × Unit Price)
+                                                            ToString("F2") formats to 2 decimal places
+                                                        *@
+                                                        <td>&pound;@((item.Quantity * item.UnitPrice).ToString("F2"))</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th colspan="3">Shipping</th>
+                                                    <td>&pound;@order.ShippingCost.ToString("F2")</td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                        
+                                        <!-- Horizontal separator for visual distinction -->
+                                        <hr />
+                                        
+                                        @*Displays the total cost of the entire order*@
+                                        <strong>Order Total: &pound;@order.TotalCost.ToString("F2")</strong>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+<style>
+    .table-hover tbody tr:hover {
+        background-color: #f5f5f5;  /* Light gray background on row hover */
+    }
+
+    @* 
+        Button group styling for better alignment of action buttons
+        Ensures buttons stay on the same line and are properly spaced
+    *@
+    .btn-group {
+        display: flex;
+        gap: 0.5rem;
+    }
+</style>
+
+@section Scripts {
+    @* 
+        Font Awesome Icons Library
+        Required for displaying invoice download icon (fa-file-invoice-dollar)
+        Loads from CDN - ensure internet connection for icon display
+    *@
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+}

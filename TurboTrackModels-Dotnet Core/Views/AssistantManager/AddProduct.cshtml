@@ -1,0 +1,246 @@
+@model TurboTrackModels_Dotnet_Core.Models.Product
+
+@{
+    ViewBag.Title = "Add Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="d-flex align-items-center mb-4">
+                @if (User.IsInRole("Stock Control Manager"))
+                {
+                    @Html.ActionLink(" ", "Dashboard", "StockManager", null, new { @class = "bi bi-arrow-left fs-4 text-decoration-none text-dark me-3", title = "Back to Dashboard" })
+                }
+                else
+                {
+                    @Html.ActionLink(" ", "ProductList", null, new { @class = "bi bi-arrow-left fs-4 text-decoration-none text-dark me-3", title = "Back to List" })
+                }
+                <h2 class="mb-0">Add New Product</h2>
+            </div>
+
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+                    @using (Html.BeginForm("AddProduct", "AssistantManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h5 class="mb-4 text-muted border-bottom pb-2">Product Details</h5>
+
+                                <div class="mb-3">
+                                    @Html.LabelFor(model => model.ProductId, "Product ID", htmlAttributes: new { @class = "form-label fw-bold" })
+                                    @Html.EditorFor(model => model.ProductId, new { htmlAttributes = new { @class = "form-control shadow-sm", placeholder = "e.g. SCX1234" } })
+                                    @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger small" })
+                                </div>
+
+                                <div class="mb-3">
+                                    @Html.LabelFor(model => model.ProductName, "Product Name", htmlAttributes: new { @class = "form-label fw-bold" })
+                                    @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control shadow-sm", placeholder = "Enter product name" } })
+                                    @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger small" })
+                                </div>
+
+                                <div class="mb-3">
+                                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "form-label fw-bold" })
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control shadow-sm", rows = 5, placeholder = "Enter product description..." })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger small" })
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "form-label fw-bold" })
+                                        <div class="input-group shadow-sm">
+                                            <span class="input-group-text">&pound;</span>
+                                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "0.00" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger small" })
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        @Html.LabelFor(model => model.StockLevel, "Stock Level", htmlAttributes: new { @class = "form-label fw-bold" })
+                                        @Html.EditorFor(model => model.StockLevel, new { htmlAttributes = new { @class = "form-control shadow-sm", placeholder = "0" } })
+                                        @Html.ValidationMessageFor(model => model.StockLevel, "", new { @class = "text-danger small" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <h5 class="mb-4 text-muted border-bottom pb-2">Product Image</h5>
+                                
+                                <div class="drop-zone shadow-sm mb-3">
+                                    <div class="drop-zone__prompt d-flex flex-column align-items-center">
+                                        <i class="bi bi-cloud-arrow-up fs-1 text-primary"></i>
+                                        <span>Drop image here or click to upload</span>
+                                        <small class="text-muted">Supports JPG, PNG</small>
+                                    </div>
+                                    <input type="file" name="imageFile" class="drop-zone__input" accept="image/*">
+                                </div>
+                                @Html.HiddenFor(model => model.ImageUrl)
+                                @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger small" })
+                                
+                                <div class="alert alert-light border small text-muted mt-3">
+                                    <i class="bi bi-info-circle me-2"></i>
+                                    Uploading a high-quality image helps customers better identify the product.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+                            @if (User.IsInRole("Stock Control Manager"))
+                            {
+                                @Html.ActionLink("Cancel", "Dashboard", "StockManager", null, new { @class = "btn btn-light" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Cancel", "ProductList", null, new { @class = "btn btn-light" })
+                            }
+                            <button type="submit" class="btn btn-primary px-4 shadow-sm">
+                                <i class="bi bi-plus-circle me-2"></i>Add Product
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        .drop-zone {
+            width: 100%;
+            height: 300px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            color: #6c757d;
+            border: 2px dashed #0d6efd;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+        }
+
+        .drop-zone:hover {
+            background-color: #e9ecef;
+            border-color: #0a58ca;
+        }
+
+        .drop-zone--over {
+            border-style: solid;
+            background-color: #dee2e6;
+            transform: scale(1.02);
+        }
+
+        .drop-zone__input {
+            display: none;
+        }
+
+        .drop-zone__thumb {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+
+        .drop-zone__thumb::after {
+            content: attr(data-label);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 8px 0;
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.6);
+            font-size: 12px;
+            text-align: center;
+            backdrop-filter: blur(2px);
+        }
+        
+        .form-control:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+        }
+    </style>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+            const dropZoneElement = inputElement.closest(".drop-zone");
+
+            dropZoneElement.addEventListener("click", (e) => {
+                inputElement.click();
+            });
+
+            inputElement.addEventListener("change", (e) => {
+                if (inputElement.files.length) {
+                    updateThumbnail(dropZoneElement, inputElement.files[0]);
+                }
+            });
+
+            dropZoneElement.addEventListener("dragover", (e) => {
+                e.preventDefault();
+                dropZoneElement.classList.add("drop-zone--over");
+            });
+
+            ["dragleave", "dragend"].forEach((type) => {
+                dropZoneElement.addEventListener(type, (e) => {
+                    dropZoneElement.classList.remove("drop-zone--over");
+                });
+            });
+
+            dropZoneElement.addEventListener("drop", (e) => {
+                e.preventDefault();
+
+                if (e.dataTransfer.files.length) {
+                    inputElement.files = e.dataTransfer.files;
+                    updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+                }
+
+                dropZoneElement.classList.remove("drop-zone--over");
+            });
+        });
+
+        function updateThumbnail(dropZoneElement, file) {
+            let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+
+            // First time - remove the prompt
+            if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+                dropZoneElement.querySelector(".drop-zone__prompt").remove();
+            }
+
+            if (!thumbnailElement) {
+                thumbnailElement = document.createElement("div");
+                thumbnailElement.classList.add("drop-zone__thumb");
+                dropZoneElement.appendChild(thumbnailElement);
+            }
+
+            thumbnailElement.dataset.label = file.name;
+
+            // Show thumbnail for image files
+            if (file.type.startsWith("image/")) {
+                const reader = new FileReader();
+
+                reader.readAsDataURL(file);
+                reader.onload = () => {
+                    thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+                };
+            } else {
+                thumbnailElement.style.backgroundImage = null;
+            }
+        }
+    </script>
+}

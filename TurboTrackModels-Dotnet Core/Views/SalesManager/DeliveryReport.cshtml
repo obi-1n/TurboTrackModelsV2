@@ -1,0 +1,74 @@
+@model TurboTrackModels_Dotnet_Core.ViewModels.DeliveryReportViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delivery Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h2 { text-align: center; color: #333; }
+        .info { margin-bottom: 20px; text-align: right; font-size: 0.9em; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        .text-right { text-align: right; }
+        .btn { display: inline-block; padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: 400; line-height: 1.42857143; text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; border: 1px solid transparent; border-radius: 4px; text-decoration: none; }
+        .btn-primary { color: #fff; background-color: #337ab7; border-color: #2e6da4; }
+        .no-print { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    @if (ViewContext.RouteData.Values["action"] as string == "DeliveryReport")
+    {
+        <div class="no-print">
+            <form method="get" style="display: inline-block;">
+                <label>Report Date:</label>
+                <input type="date" name="reportDate" value="@Model.ReportDate.ToString("yyyy-MM-dd")" style="padding: 5px;" />
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </form>
+            <a href="@Url.Action("DownloadDeliveryReportExcel", new { reportDate = Model.ReportDate })" class="btn" style="background-color: #5cb85c; color: white;">Download Excel</a>
+            <a href="@Url.Action("Dashboard", "SalesManager")" class="btn" style="background-color: #ccc;">Back to Dashboard</a>
+        </div>
+    }
+
+    <h2>Delivery Report</h2>
+    <div class="info">
+        Generated on: @DateTime.Now.ToString("f")<br />
+        Report Date: @Model.ReportDate.ToLongDateString()
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th class="text-right">Total Cost</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.OutgoingDeliveries.Any())
+            {
+                <tr>
+                    <td colspan="4" style="text-align: center;">No deliveries found for this date.</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var delivery in Model.OutgoingDeliveries)
+                {
+                    <tr>
+                        <td>@delivery.OrderId</td>
+                    <td>@(delivery.Customer?.User?.FirstName ?? "N/A")</td>
+                        <td class="text-right">@delivery.TotalCost.ToString("C")</td>
+                        <td>@delivery.Status</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</body>
+</html>

@@ -47,21 +47,6 @@ public class InvoiceClerkController(TTMDbContext db) : Controller
             return NotFound("Order not found.");
         }
 
-        var lines = new List<string>
-        {
-            "TURBO TRACK MODELS - INVOICE",
-            $"Order ID: {order.OrderId}",
-            $"Date: {order.OrderDate:dd MMMM yyyy}",
-            $"Customer: {order.Customer.User.FirstName} {order.Customer.User.LastName}",
-            $"Email: {order.Customer.User.Email}",
-            $"Address: {order.Customer.Street}, {order.Customer.Town}, {order.Customer.PostCode}",
-            "",
-            "Items:"
-        };
-        lines.AddRange(order.OrderItems.Select(item =>
-            $"{item.Product.ProductName} | Qty {item.Quantity} | GBP {item.Product.Price:F2} | GBP {item.Quantity * item.Product.Price:F2}"));
-        lines.Add($"Order total: GBP {order.TotalCost:F2}");
-
-        return File(TextPdf.Create(lines), "application/pdf", $"Invoice_{order.OrderId}.pdf");
+        return File(InvoicePdf.Create(order), "application/pdf", $"Invoice_{order.OrderId}.pdf");
     }
 }

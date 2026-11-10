@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_StockManagerLayout.cshtml";
+}
+
+@inject Microsoft.AspNetCore.Identity.UserManager<TurboTrackModels_Dotnet_Core.Models.User> UserManager
+
+@{
+    var currentUser = await UserManager.GetUserAsync(User);
+    var firstName = currentUser?.FirstName ?? string.Empty;
+}
+
+<div class="container mt-4">
+    @*Display personalized greeting*@ 
+    @if (!string.IsNullOrEmpty(firstName))
+    {
+        <h2 class="text-center">Hi @firstName</h2>
+    }
+    <hr />
+    <div class="row">
+        @*Display dashboard cards*@
+        @*Stock Reports Card*@
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Stock Reports</h5>
+                    <p class="card-text">Generate and view stock reports showing current stock levels and status.</p>
+                    <div class="d-grid gap-2">
+                        @Html.ActionLink("View Stock Report", "StockReport", "StockManager", null, new { @class = "btn btn-primary mb-2", style = "display: block;" })
+                        @Html.ActionLink("Stock by Supplier", "StockBySupplierReport", "StockManager", null, new { @class = "btn btn-info", style = "display: block;" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*Low Stock Alert Card*@
+        @*Low Stock Alert Card*@
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Low Stock Alert</h5>
+                    <p class="card-text">Add a new product, description, price, and quantity to the inventory.</p>
+                    @Html.ActionLink("Add Stock", "AddProduct", "AssistantManager", null, new { @class = "btn btn-danger" })
+                </div>
+            </div>
+        </div>
+
+        @*Manage Inventory Card*@
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Inventory</h5>
+                    <p class="card-text">View all products and update their current stock levels directly.</p>
+                    @Html.ActionLink("Update Stock", "ProductList", "AssistantManager", null, new { @class = "btn btn-success" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

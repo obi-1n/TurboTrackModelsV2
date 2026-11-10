@@ -1,0 +1,78 @@
+@model TurboTrackModels_Dotnet_Core.ViewModels.SalesStockReportViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h2 { text-align: center; color: #333; }
+        .info { margin-bottom: 20px; text-align: right; font-size: 0.9em; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        .text-right { text-align: right; }
+        .badge { padding: 5px 10px; border-radius: 4px; font-size: 0.85em; color: white; }
+        .badge-danger { background-color: #d9534f; }
+        .badge-warning { background-color: #f0ad4e; }
+        .badge-success { background-color: #5cb85c; }
+        .btn { display: inline-block; padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: 400; line-height: 1.42857143; text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; border: 1px solid transparent; border-radius: 4px; text-decoration: none; }
+        .btn-primary { color: #fff; background-color: #337ab7; border-color: #2e6da4; }
+        .no-print { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    @if (ViewContext.RouteData.Values["action"] as string == "StockReport")
+    {
+        <div class="no-print">
+            <a asp-controller="SalesManager" asp-action="DownloadStockReportExcel" class="btn btn-primary">Download Excel</a>
+            <a href="@Url.Action("Dashboard", "SalesManager")" class="btn" style="background-color: #ccc;">Back to Dashboard</a>
+        </div>
+    }
+
+    <h2>Stock Report</h2>
+    <div class="info">
+        Generated on: @Model.GeneratedAt.ToString("f")
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th class="text-right">Price</th>
+                <th class="text-right">Stock Level</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td>@product.ProductId</td>
+                    <td>@product.ProductName</td>
+                    <td class="text-right">@product.Price.ToString("C")</td>
+                    <td class="text-right">@product.StockLevel</td>
+                    <td>
+                        @if (product.StockLevel <= 5)
+                        {
+                            <span class="badge badge-danger">Low Stock</span>
+                        }
+                        else if (product.StockLevel <= 20)
+                        {
+                            <span class="badge badge-warning">Medium Stock</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-success">Good Stock</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

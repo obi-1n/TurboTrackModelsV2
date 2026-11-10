@@ -17,6 +17,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
         public int OrderId { get; set; }
         public DateTime OrderDate { get; set; }
         public decimal TotalCost { get; set; }
+        public decimal ShippingCost { get; set; }
         public OrderStatus Status { get; set; }
         public string? ReturnReason { get; set; }
 

@@ -7,6 +7,7 @@ using TurboTrackModels_Dotnet_Core.ViewModels;
 namespace TurboTrackModels_Dotnet_Core.Controllers;
 
 public class AccountController(
+    TTMDbContext db,
     UserManager<User> userManager,
     SignInManager<User> signInManager,
     RoleManager<IdentityRole> roleManager) : Controller
@@ -118,6 +119,15 @@ public class AccountController(
             }
         }
 
+        db.Customers.Add(new CustomerProfile
+        {
+            UserId = user.Id,
+            Street = model.Street,
+            Town = model.Town,
+            PostCode = model.PostCode,
+            PhoneNumber = model.PhoneNumber
+        });
+        await db.SaveChangesAsync();
         await signInManager.SignInAsync(user, isPersistent: false);
         return RedirectToAction("Index", "Home");
     }

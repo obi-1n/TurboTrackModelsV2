@@ -1,11 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>TurboTrackModels_Dotnet_Core</RootNamespace>
-    </PropertyGroup>
+      <UserSecretsId>4414d4f8-bf72-47ac-81ad-f04472faee7d</UserSecretsId>
+  </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.15" />
@@ -15,6 +16,11 @@
         </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.15" />
         <PackageReference Include="ClosedXML" Version="0.105.0" />
+        <PackageReference Include="Syncfusion.Pdf.Net.Core" Version="35.1.43" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="Scalextric Car Images/**/*" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     </ItemGroup>
 
 </Project>

@@ -13,7 +13,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
         public List<CartItem> Items { get; set; } = new();
         //Calculate the total cost of the items in the cart
         public decimal TotalCost =>
-            Items.Sum(i => i.Product.Price * i.Quantity);
+            Items.Sum(i => decimal.Round(i.Product.Price, 2, MidpointRounding.AwayFromZero) * i.Quantity);
     }
 
     /// <summary>

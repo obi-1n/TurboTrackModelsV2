@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "UT3A5OiAq0s=",
+  "dgSpecHash": "ZWfiShupw8I=",
   "success": true,
   "projectFilePath": "/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core.csproj",
   "expectedPackageFiles": [
@@ -36,6 +36,10 @@
     "/Users/anthonynnegha/.nuget/packages/sqlitepclraw.core/2.1.13/sqlitepclraw.core.2.1.13.nupkg.sha512",
     "/Users/anthonynnegha/.nuget/packages/sqlitepclraw.lib.e_sqlite3/2.1.13/sqlitepclraw.lib.e_sqlite3.2.1.13.nupkg.sha512",
     "/Users/anthonynnegha/.nuget/packages/sqlitepclraw.provider.e_sqlite3/2.1.13/sqlitepclraw.provider.e_sqlite3.2.1.13.nupkg.sha512",
+    "/Users/anthonynnegha/.nuget/packages/syncfusion.compression.net.core/35.1.43/syncfusion.compression.net.core.35.1.43.nupkg.sha512",
+    "/Users/anthonynnegha/.nuget/packages/syncfusion.licensing/35.1.43/syncfusion.licensing.35.1.43.nupkg.sha512",
+    "/Users/anthonynnegha/.nuget/packages/syncfusion.pdf.net.core/35.1.43/syncfusion.pdf.net.core.35.1.43.nupkg.sha512",
+    "/Users/anthonynnegha/.nuget/packages/syncfusion.telemetry/35.1.43/syncfusion.telemetry.35.1.43.nupkg.sha512",
     "/Users/anthonynnegha/.nuget/packages/system.codedom/6.0.0/system.codedom.6.0.0.nupkg.sha512",
     "/Users/anthonynnegha/.nuget/packages/system.composition/9.0.0/system.composition.9.0.0.nupkg.sha512",
     "/Users/anthonynnegha/.nuget/packages/system.composition.attributedmodel/9.0.0/system.composition.attributedmodel.9.0.0.nupkg.sha512",

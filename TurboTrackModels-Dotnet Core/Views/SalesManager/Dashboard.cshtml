@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+@inject Microsoft.AspNetCore.Identity.UserManager<TurboTrackModels_Dotnet_Core.Models.User> UserManager
+
+@{
+    var currentUser = await UserManager.GetUserAsync(User);
+    var firstName = currentUser?.FirstName ?? string.Empty;
+}
+
+<div class="container mt-4">
+    @if (!string.IsNullOrEmpty(firstName))
+    {
+        <h2 class="text-center">Hi @firstName</h2>
+        <br />
+    }
+
+    @*Add a few buttons that link to different sales manager functionalities*@
+
+<div class="row">
+    @*Display dashboard cards*@
+    @*Turnover Reports Card*@
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title">Turnover Reports</h5>
+                <p class="card-text">Generate and view daily/weekly turnover reports showing increases and decreases in sales over time.</p>
+                @Html.ActionLink("Turnover Report", "TurnoverReport", "SalesManager", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+
+    @*Delivery Report Card*@
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title">Delivery Report</h5>
+                <p class="card-text">Generate and view daily delivery reports showing incoming and outgoing deliveries.</p>
+                @Html.ActionLink("Delivery Report", "DeliveryReport", "SalesManager", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+
+    @*Stock Report Card*@
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title">Stock Report</h5>
+                <p class="card-text">View all products and generate detailed stock reports.</p>
+                @Html.ActionLink("Stock Report", "StockReport", "SalesManager", null, new { @class = "btn btn-success" })
+            </div>
+        </div>
+    </div>
+
+    @*Stock by Supplier Card*@
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title">Stock by Supplier</h5>
+                <p class="card-text">View detailed stock reports grouped by supplier/category.</p>
+                @Html.ActionLink("Stock by Supplier", "StockBySupplierReport", "SalesManager", null, new { @class = "btn btn-info" })
+            </div>
+        </div>
+    </div>
+
+    @*Customer Orders and Invoices Card*@
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title">Orders and Invoices</h5>
+                <p class="card-text">View all customer orders and generate PDF invoice reports.</p>
+                @Html.ActionLink("Invoice Reports", "InvoicesReport", "SalesManager", null, new { @class = "btn btn-warning" })
+            </div>
+        </div>
+    </div>
+
+    @*Product Sales Report Card*@
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title">Product Sales Report</h5>
+                <p class="card-text">Generate a PDF of product sales for each product in the system.</p>
+                @Html.ActionLink("Product Sales Report", "ProductSalesReport", "SalesManager", null, new { @class = "btn btn-dark" })
+            </div>
+        </div>
+    </div>
+</div>
+</div>

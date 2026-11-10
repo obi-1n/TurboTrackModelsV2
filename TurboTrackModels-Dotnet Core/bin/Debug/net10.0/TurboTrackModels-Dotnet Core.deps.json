@@ -11,7 +11,8 @@
           "ClosedXML": "0.105.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "10.0.15",
           "Microsoft.EntityFrameworkCore.Design": "10.0.15",
-          "Microsoft.EntityFrameworkCore.Sqlite": "10.0.15"
+          "Microsoft.EntityFrameworkCore.Sqlite": "10.0.15",
+          "Syncfusion.Pdf.Net.Core": "35.1.43"
         },
         "runtime": {
           "TurboTrackModels-Dotnet Core.dll": {}
@@ -647,6 +648,43 @@
           }
         }
       },
+      "Syncfusion.Compression.Net.Core/35.1.43": {
+        "runtime": {
+          "lib/net10.0/Syncfusion.Compression.Portable.dll": {
+            "assemblyVersion": "35.1.43.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Syncfusion.Licensing/35.1.43": {
+        "runtime": {
+          "lib/net10.0/Syncfusion.Licensing.dll": {
+            "assemblyVersion": "35.1.43.0",
+            "fileVersion": "35.1.43.0"
+          }
+        }
+      },
+      "Syncfusion.Pdf.Net.Core/35.1.43": {
+        "dependencies": {
+          "Syncfusion.Compression.Net.Core": "35.1.43",
+          "Syncfusion.Licensing": "35.1.43",
+          "Syncfusion.Telemetry": "35.1.43"
+        },
+        "runtime": {
+          "lib/net10.0/Syncfusion.Pdf.Portable.dll": {
+            "assemblyVersion": "35.1.43.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Syncfusion.Telemetry/35.1.43": {
+        "runtime": {
+          "lib/net10.0/Syncfusion.Telemetry.dll": {
+            "assemblyVersion": "35.1.43.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "System.CodeDom/6.0.0": {
         "runtime": {
           "lib/net6.0/System.CodeDom.dll": {
@@ -940,6 +978,34 @@
       "sha512": "sha512-ZU60dSqoSNRe49KcQDUmOVgdRtjITOssVXFtiISs+zJXDI4D2Sndwpn2NOtzDQNPu0ZAvpoLPQ+GLKv6iEZn8Q==",
       "path": "sqlitepclraw.provider.e_sqlite3/2.1.13",
       "hashPath": "sqlitepclraw.provider.e_sqlite3.2.1.13.nupkg.sha512"
+    },
+    "Syncfusion.Compression.Net.Core/35.1.43": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UYoc170+Hy8LBKoLZ4YzmKgig3a0G/WhhNMPWxVApAzE02xCP6s2qVOUHn39bGcTP4bPbjFYZn5Hm4Xab9bNzg==",
+      "path": "syncfusion.compression.net.core/35.1.43",
+      "hashPath": "syncfusion.compression.net.core.35.1.43.nupkg.sha512"
+    },
+    "Syncfusion.Licensing/35.1.43": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-refyN0KIPZFlwNW8WJ6NGs+WekoaEkSFrNMMKy6JNsPZJj/5oMp7VsRUa1G3GXwNbBA/pYeBvL7EwPI5AoPIGQ==",
+      "path": "syncfusion.licensing/35.1.43",
+      "hashPath": "syncfusion.licensing.35.1.43.nupkg.sha512"
+    },
+    "Syncfusion.Pdf.Net.Core/35.1.43": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vdgzqgZXJ+MZlL3i1AR9clfJypkVF5t+of9BxO/i7NHTGqGyD0Y6fOXsC6t0vwZf0HLgBMniZlE9GkgeS2mzjw==",
+      "path": "syncfusion.pdf.net.core/35.1.43",
+      "hashPath": "syncfusion.pdf.net.core.35.1.43.nupkg.sha512"
+    },
+    "Syncfusion.Telemetry/35.1.43": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uILJmArHyjFDMRBLTehNj3ojBliedyEbbMH5l/tDwrSqpDtL0Yvd3LW++zwMQMA2lQvdKPsJR6blgDQQmD5ucQ==",
+      "path": "syncfusion.telemetry/35.1.43",
+      "hashPath": "syncfusion.telemetry.35.1.43.nupkg.sha512"
     },
     "System.CodeDom/6.0.0": {
       "type": "package",

@@ -1,4 +1,3 @@
-using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TurboTrackModels_Dotnet_Core.Models;
@@ -9,9 +8,6 @@ namespace TurboTrackModels_Dotnet_Core.Controllers;
 [Authorize(Roles = "Sales Manager")]
 public class SalesManagerController(TTMDbContext db) : Controller
 {
-    private const string ExcelContentType =
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-
     public IActionResult Dashboard() => View();
 
     public async Task<IActionResult> TurnoverReport(DateTime? startDate, DateTime? endDate)
@@ -46,11 +42,11 @@ public class SalesManagerController(TTMDbContext db) : Controller
             .ToListAsync();
         var rows = orders.GroupBy(order => order.OrderDate.Date)
             .OrderBy(group => group.Key)
-            .Select(group => new[]
+            .Select(group => new object?[]
             {
-                group.Key.ToString("yyyy-MM-dd"),
-                group.Count().ToString(),
-                group.Sum(order => order.TotalCost).ToString("F2")
+                group.Key,
+                group.Count(),
+                group.Sum(order => order.TotalCost)
             });
         return ExcelFile("Turnover", ["Date", "Orders", "Turnover"], rows,
             $"TurnoverReport_{start:yyyyMMdd}_{end.AddTicks(-1):yyyyMMdd}.xlsx");
@@ -84,12 +80,12 @@ public class SalesManagerController(TTMDbContext db) : Controller
                             order.Status == OrderStatus.Delivered)
             .OrderBy(order => order.OrderId)
             .ToListAsync();
-        var rows = deliveries.Select(order => new[]
+        var rows = deliveries.Select(order => new object?[]
         {
-            order.OrderId.ToString(),
-            order.OrderDate.ToString("yyyy-MM-dd HH:mm"),
+            order.OrderId,
+            order.OrderDate,
             $"{order.Customer.User.FirstName} {order.Customer.User.LastName}",
-            order.TotalCost.ToString("F2")
+            order.TotalCost
         });
         return ExcelFile("Deliveries",
             ["Order ID", "Order Date", "Customer", "Total Cost"],
@@ -105,13 +101,19 @@ public class SalesManagerController(TTMDbContext db) : Controller
         });
     }
 
-    public async Task<IActionResult> DownloadStockReportPdf()
+    public async Task<IActionResult> DownloadStockReportExcel()
     {
         var products = await db.Products.OrderBy(product => product.ProductId).ToListAsync();
-        var lines = new List<string> { "STOCK REPORT", $"Generated: {DateTime.Now:g}", "" };
-        lines.AddRange(products.Select(product =>
-            $"{product.ProductId} | {product.ProductName} | Stock {product.StockLevel}"));
-        return File(TextPdf.Create(lines), "application/pdf", "StockReport.pdf");
+        var rows = products.Select(product => new object?[]
+        {
+            product.ProductId,
+            product.ProductName,
+            product.Price,
+            product.StockLevel
+        });
+        return ExcelFile("Stock",
+            ["Product ID", "Product Name", "Price", "Stock Level"],
+            rows, "StockReport.xlsx");
     }
 
     public async Task<IActionResult> StockBySupplierReport(int? supplierId)
@@ -128,12 +130,12 @@ public class SalesManagerController(TTMDbContext db) : Controller
     public async Task<IActionResult> DownloadStockBySupplierReportExcel(int? supplierId)
     {
         var products = await GetFilteredProductsAsync(supplierId);
-        var rows = products.Select(product => new[]
+        var rows = products.Select(product => new object?[]
         {
             product.ProductId,
             product.ProductName,
-            product.Price.ToString("F2"),
-            product.StockLevel.ToString()
+            product.Price,
+            product.StockLevel
         });
         return ExcelFile("Stock",
             ["Product ID", "Product Name", "Price", "Stock Level"],
@@ -152,13 +154,21 @@ public class SalesManagerController(TTMDbContext db) : Controller
         });
     }
 
-    public async Task<IActionResult> DownloadInvoicesReportPdf(DateTime? filterDate, string? filterUsername)
+    public async Task<IActionResult> DownloadInvoicesReportExcel(DateTime? filterDate, string? filterUsername)
     {
         var orders = await GetFilteredOrdersAsync(filterDate, filterUsername);
-        var lines = new List<string> { "INVOICES REPORT", $"Generated: {DateTime.Now:g}", "" };
-        lines.AddRange(orders.Select(order =>
-            $"Order {order.OrderId} | {order.OrderDate:yyyy-MM-dd} | {order.Customer.User.UserName} | GBP {order.TotalCost:F2}"));
-        return File(TextPdf.Create(lines), "application/pdf", "InvoicesReport.pdf");
+        var rows = orders.Select(order => new object?[]
+        {
+            order.OrderId,
+            order.OrderDate,
+            order.Customer.User.UserName,
+            $"{order.Customer.User.FirstName} {order.Customer.User.LastName}",
+            order.TotalCost,
+            order.Status.ToString()
+        });
+        return ExcelFile("Invoices",
+            ["Order ID", "Order Date", "Username", "Customer", "Total", "Status"],
+            rows, "InvoicesReport.xlsx");
     }
 
     public async Task<IActionResult> ProductSalesReport()
@@ -170,13 +180,20 @@ public class SalesManagerController(TTMDbContext db) : Controller
         });
     }
 
-    public async Task<IActionResult> DownloadProductSalesReportPdf()
+    public async Task<IActionResult> DownloadProductSalesReportExcel()
     {
         var sales = await GetProductSalesAsync();
-        var lines = new List<string> { "PRODUCT SALES REPORT", $"Generated: {DateTime.Now:g}", "" };
-        lines.AddRange(sales.Select(product =>
-            $"{product.ProductId} | {product.ProductName} | Qty {product.TotalQuantitySold} | GBP {product.TotalRevenue:F2} | Stock {product.CurrentStockLevel}"));
-        return File(TextPdf.Create(lines), "application/pdf", "ProductSalesReport.pdf");
+        var rows = sales.Select(product => new object?[]
+        {
+            product.ProductId,
+            product.ProductName,
+            product.TotalQuantitySold,
+            product.CurrentStockLevel,
+            product.TotalRevenue
+        });
+        return ExcelFile("Product Sales",
+            ["Product ID", "Product Name", "Quantity Sold", "Current Stock", "Revenue"],
+            rows, "ProductSalesReport.xlsx");
     }
 
     private async Task<List<Order>> GetFilteredOrdersAsync(DateTime? filterDate, string? filterUsername)
@@ -226,7 +243,7 @@ public class SalesManagerController(TTMDbContext db) : Controller
                 ProductName = product.ProductName,
                 CurrentStockLevel = product.StockLevel,
                 TotalQuantitySold = productItems.Sum(item => item.Quantity),
-                TotalRevenue = productItems.Sum(item => item.Quantity * item.Product.Price)
+                TotalRevenue = productItems.Sum(item => item.Quantity * item.UnitPrice)
             };
         }).OrderByDescending(item => item.TotalRevenue).ToList();
     }
@@ -265,31 +282,7 @@ public class SalesManagerController(TTMDbContext db) : Controller
     private IActionResult ExcelFile(
         string sheetName,
         string[] headers,
-        IEnumerable<string[]> rows,
+        IEnumerable<object?[]> rows,
         string fileName)
-    {
-        using var workbook = new XLWorkbook();
-        var sheet = workbook.Worksheets.Add(sheetName);
-        for (var column = 0; column < headers.Length; column++)
-        {
-            sheet.Cell(1, column + 1).Value = headers[column];
-            sheet.Cell(1, column + 1).Style.Font.Bold = true;
-        }
-
-        var rowNumber = 2;
-        foreach (var values in rows)
-        {
-            for (var column = 0; column < values.Length; column++)
-            {
-                sheet.Cell(rowNumber, column + 1).Value = values[column];
-            }
-
-            rowNumber++;
-        }
-
-        sheet.Columns().AdjustToContents();
-        using var stream = new MemoryStream();
-        workbook.SaveAs(stream);
-        return File(stream.ToArray(), ExcelContentType, fileName);
-    }
+        => File(ReportExcel.Create(sheetName, headers, rows), ReportExcel.ContentType, fileName);
 }
