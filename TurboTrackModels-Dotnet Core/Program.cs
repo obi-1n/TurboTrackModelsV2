@@ -19,12 +19,17 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/Login";
     options.AccessDeniedPath = "/Account/Login";
+    if (builder.Environment.IsDevelopment())
+    {
+        options.Cookie.Name = $"TurboTrackModels.Auth.{Guid.NewGuid():N}";
+    }
 });
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
+builder.Services.AddScoped<StripePaymentService>();
 builder.Services.AddScoped<ShoppingCartService>();
 builder.Services.Configure<StripeSettings>(
     builder.Configuration.GetSection("Stripe"));
@@ -50,6 +55,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(

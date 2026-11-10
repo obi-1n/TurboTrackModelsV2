@@ -18,6 +18,8 @@ namespace TurboTrackModels_Dotnet_Core.Models
         public DateTime OrderDate { get; set; }
         public decimal TotalCost { get; set; }
         public decimal ShippingCost { get; set; }
+        public string? StripeChargeId { get; set; }
+        public string? StripeRefundId { get; set; }
         public OrderStatus Status { get; set; }
         public string? ReturnReason { get; set; }
 
@@ -46,6 +48,7 @@ namespace TurboTrackModels_Dotnet_Core.Models
         Delivered,
         Cancelled,
         ReturnRequested,
-        Returned
+        Returned,
+        RefundPending
     }
 }

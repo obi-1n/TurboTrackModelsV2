@@ -7,6 +7,7 @@ namespace TurboTrackModels_Dotnet_Core.Controllers;
 [Authorize(Roles = "Assistant Manager,Stock Control Manager")]
 public class AssistantManagerController(
     TTMDbContext db,
+    StripePaymentService stripePaymentService,
     IWebHostEnvironment environment) : Controller
 {
     public IActionResult Dashboard() => View();
@@ -16,7 +17,8 @@ public class AssistantManagerController(
         var orders = await db.Orders
             .Include(order => order.Customer)
                 .ThenInclude(customer => customer.User)
-            .Where(order => order.Status == OrderStatus.ReturnRequested)
+            .Where(order => order.Status == OrderStatus.ReturnRequested ||
+                            order.Status == OrderStatus.RefundPending)
             .OrderByDescending(order => order.OrderDate)
             .ToListAsync();
         return View(orders);
@@ -24,11 +26,59 @@ public class AssistantManagerController(
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    public async Task<IActionResult> RetryRefund(int orderId)
+    {
+        var order = await db.Orders.AsNoTracking().FirstOrDefaultAsync(order =>
+            order.OrderId == orderId && order.Status == OrderStatus.RefundPending);
+        if (order is null)
+        {
+            TempData["Error"] = $"Order #{orderId} is not awaiting a refund.";
+            return RedirectToAction(nameof(ManageReturns));
+        }
+
+        if (string.IsNullOrWhiteSpace(order.StripeChargeId))
+        {
+            TempData["Error"] = $"Order #{orderId} has no recorded Stripe charge and cannot be refunded.";
+            return RedirectToAction(nameof(ManageReturns));
+        }
+
+        var refund = order.StripeRefundId is null
+            ? await stripePaymentService.RefundAsync(
+                order.StripeChargeId, $"refund-order-{order.OrderId}")
+            : new StripeRefundResult(true, order.StripeRefundId, null);
+        if (!refund.Succeeded)
+        {
+            TempData["Error"] = $"Refund for order #{orderId} failed: {refund.ErrorMessage}";
+            return RedirectToAction(nameof(ManageReturns));
+        }
+
+        await using var transaction = await db.Database.BeginTransactionAsync(
+            System.Data.IsolationLevel.Serializable);
+        var currentOrder = await db.Orders.FirstOrDefaultAsync(order =>
+            order.OrderId == orderId && order.Status == OrderStatus.RefundPending);
+        if (currentOrder is not null)
+        {
+            currentOrder.Status = OrderStatus.Cancelled;
+            currentOrder.StripeRefundId = refund.RefundId;
+            await db.SaveChangesAsync();
+            await transaction.CommitAsync();
+            TempData["Success"] = $"Refund for order #{orderId} completed.";
+        }
+        else
+        {
+            await transaction.RollbackAsync();
+            TempData["Error"] = $"Order #{orderId} is no longer awaiting a refund.";
+        }
+
+        return RedirectToAction(nameof(ManageReturns));
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> MarkAsReturned(int orderId)
     {
         var order = await db.Orders
-            .Include(order => order.OrderItems)
-                .ThenInclude(item => item.Product)
+            .AsNoTracking()
             .FirstOrDefaultAsync(order => order.OrderId == orderId);
         if (order is null)
         {
@@ -37,13 +87,50 @@ public class AssistantManagerController(
 
         if (order.Status == OrderStatus.ReturnRequested)
         {
-            order.Status = OrderStatus.Returned;
-            foreach (var item in order.OrderItems)
+            if (string.IsNullOrWhiteSpace(order.StripeChargeId))
             {
-                item.Product.StockLevel = Math.Min(100, item.Product.StockLevel + item.Quantity);
+                TempData["Error"] =
+                    $"Order #{orderId} has no recorded payment reference and cannot be refunded. Contact support.";
+                return RedirectToAction(nameof(ManageReturns));
             }
 
-            await db.SaveChangesAsync();
+            var refund = order.StripeRefundId is null
+                ? await stripePaymentService.RefundAsync(
+                    order.StripeChargeId, $"refund-order-{order.OrderId}")
+                : new StripeRefundResult(true, order.StripeRefundId, null);
+            if (!refund.Succeeded)
+            {
+                TempData["Error"] =
+                    $"Order #{orderId} could not be completed because the payment refund failed: {refund.ErrorMessage}";
+                return RedirectToAction(nameof(ManageReturns));
+            }
+
+            await using var transaction = await db.Database.BeginTransactionAsync(
+                System.Data.IsolationLevel.Serializable);
+            var currentOrder = await db.Orders
+                .Include(order => order.OrderItems)
+                    .ThenInclude(item => item.Product)
+                .FirstOrDefaultAsync(order => order.OrderId == orderId);
+            if (currentOrder?.Status == OrderStatus.ReturnRequested)
+            {
+                currentOrder.Status = OrderStatus.Returned;
+                currentOrder.StripeRefundId = refund.RefundId;
+                foreach (var item in currentOrder.OrderItems)
+                {
+                    item.Product.StockLevel += item.Quantity;
+                }
+
+                await db.SaveChangesAsync();
+                await transaction.CommitAsync();
+                TempData["Success"] =
+                    $"Order #{orderId} was marked returned, its payment refunded, and items restored to stock.";
+            }
+            else
+            {
+                await transaction.RollbackAsync();
+                TempData["Error"] =
+                    $"Order #{orderId} is no longer awaiting a return. The refund was already requested.";
+            }
         }
 
         return RedirectToAction(nameof(ManageReturns));

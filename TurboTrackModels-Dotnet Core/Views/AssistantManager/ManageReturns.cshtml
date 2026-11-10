@@ -6,12 +6,21 @@
 
 <div class="container mt-5">
     <h2>Manage Return Requests</h2>
-    <p class="text-muted">Review and process orders that have been requested for return.</p>
+    <p class="text-muted">Process customer returns and resolve payments awaiting a refund.</p>
+
+    @if (TempData["Success"] is string success)
+    {
+        <div class="alert alert-success" role="status">@success</div>
+    }
+    @if (TempData["Error"] is string error)
+    {
+        <div class="alert alert-danger" role="alert">@error</div>
+    }
 
     @if (Model == null || Model.Count == 0)
     {
         <div class="alert alert-info">
-            <p>No pending return requests found.</p>
+            <p>No pending returns or refunds found.</p>
         </div>
     }
     else
@@ -23,7 +32,7 @@
                         <th>Order ID</th>
                         <th>Customer</th>
                         <th>Order Date</th>
-                        <th>Return Reason</th>
+                        <th>Details</th>
                         <th>Total Cost</th>
                         <th>Actions</th>
                     </tr>
@@ -45,16 +54,36 @@
                             </td>
                             <td>@order.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
                             <td>
-                                <div style="max-width: 300px; white-space: pre-wrap;">@order.ReturnReason</div>
+                                @if (order.Status == TurboTrackModels_Dotnet_Core.Models.OrderStatus.RefundPending)
+                                {
+                                    <span class="badge bg-warning text-dark">Refund pending</span>
+                                }
+                                else
+                                {
+                                    <div style="max-width: 300px; white-space: pre-wrap;">@order.ReturnReason</div>
+                                }
                             </td>
                             <td>&pound;@order.TotalCost.ToString("F2")</td>
                             <td>
-                                <form asp-controller="AssistantManager" asp-action="MarkAsReturned"
-                                      asp-route-orderId="@order.OrderId" method="post" style="display:inline;">
-                                    <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Are you sure you want to mark this order as returned?')">
-                                        Mark as Returned
-                                    </button>
-                                </form>
+                                @if (order.Status == TurboTrackModels_Dotnet_Core.Models.OrderStatus.RefundPending)
+                                {
+                                    <form asp-controller="AssistantManager" asp-action="RetryRefund"
+                                          asp-route-orderId="@order.OrderId" method="post">
+                                        <button type="submit" class="btn btn-sm btn-warning">
+                                            Retry Refund
+                                        </button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form asp-controller="AssistantManager" asp-action="MarkAsReturned"
+                                          asp-route-orderId="@order.OrderId" method="post">
+                                        <button type="submit" class="btn btn-sm btn-success"
+                                                onclick="return confirm('Refund this order and mark it as returned?')">
+                                            Refund &amp; Mark Returned
+                                        </button>
+                                    </form>
+                                }
                             </td>
                         </tr>
                     }

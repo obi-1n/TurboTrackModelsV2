@@ -55,7 +55,6 @@
 /Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/scopedcss/bundle/TurboTrackModels-Dotnet Core.styles.css
 /Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/scopedcss/projectbundle/TurboTrackModels-Dotnet Core.bundle.scp.css
 /Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/loppckl2fb-{0}-lugek5hnai-lugek5hnai.gz
-/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/g7zmep1kfw-{0}-61n19gt1b8-61n19gt1b8.gz
 /Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/1zf94zyj56-{0}-fr7q2aak1r-fr7q2aak1r.gz
 /Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/q2ksio5po7-{0}-bqjiyaj88i-bqjiyaj88i.gz
 /Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/dmk4aqaphe-{0}-c2jlpeoesf-c2jlpeoesf.gz

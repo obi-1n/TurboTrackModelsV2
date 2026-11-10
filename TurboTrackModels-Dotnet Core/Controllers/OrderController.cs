@@ -14,6 +14,8 @@ public class OrderController(
     TTMDbContext db,
     ShoppingCartService shoppingCart,
     IHttpClientFactory httpClientFactory,
+    StripePaymentService stripePaymentService,
+    ILogger<OrderController> logger,
     IOptions<StripeSettings> stripeOptions) : Controller
 {
     private const decimal ShippingCost = 4m;
@@ -192,12 +194,16 @@ public class OrderController(
         }
 
         if (!paymentResponse.RootElement.TryGetProperty("status", out var status) ||
-            status.GetString() != "succeeded")
+            status.GetString() != "succeeded" ||
+            !paymentResponse.RootElement.TryGetProperty("id", out var chargeIdElement) ||
+            string.IsNullOrWhiteSpace(chargeIdElement.GetString()))
         {
-            ModelState.AddModelError(string.Empty, "The payment was not completed.");
+            ModelState.AddModelError(string.Empty,
+                "The payment response could not be verified. Contact support before trying again.");
             return CheckoutView(cart);
         }
 
+        var chargeId = chargeIdElement.GetString()!;
         var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         var staff = currentUserId is null
             ? null
@@ -207,6 +213,7 @@ public class OrderController(
             OrderDate = DateTime.UtcNow,
             TotalCost = totalAmount,
             ShippingCost = ShippingCost,
+            StripeChargeId = chargeId,
             Status = OrderStatus.Pending,
             CustomerID = customer.CustomerID,
             StaffID = staff?.StaffId,
@@ -218,21 +225,99 @@ public class OrderController(
             }).ToList()
         };
 
+        await using var transaction = await db.Database.BeginTransactionAsync(
+            System.Data.IsolationLevel.Serializable);
+        var currentProducts = new Dictionary<string, Product>();
+        var stockChanged = false;
+        var productUnavailable = false;
         foreach (var item in cart.Items)
         {
             var product = await db.Products.FindAsync(item.ProductId);
-            if (product is null || product.StockLevel < item.Quantity)
+            if (product is null)
             {
-                ModelState.AddModelError(string.Empty, "Stock changed while payment was processing. Contact support with your payment reference.");
+                productUnavailable = true;
+                stockChanged = true;
+                continue;
+            }
+
+            currentProducts.Add(item.ProductId, product);
+            stockChanged |= product.StockLevel < item.Quantity;
+        }
+
+        if (stockChanged)
+        {
+            order.Status = OrderStatus.RefundPending;
+            if (productUnavailable)
+            {
+                order.OrderItems = [];
+            }
+
+            db.Orders.Add(order);
+            try
+            {
+                await db.SaveChangesAsync();
+                await transaction.CommitAsync();
+            }
+            catch (DbUpdateException exception)
+            {
+                await transaction.RollbackAsync();
+                logger.LogError(exception,
+                    "Could not record order after successful Stripe charge {ChargeId}.", chargeId);
+                var failedSaveRefund = await stripePaymentService.RefundAsync(
+                    chargeId, $"refund-charge-{chargeId}");
+                ModelState.AddModelError(string.Empty, failedSaveRefund.Succeeded
+                    ? "Stock changed and the order could not be recorded, so your payment has been refunded."
+                    : $"Stock changed after payment and the order could not be recorded. Contact support with payment reference {chargeId}. Refund error: {failedSaveRefund.ErrorMessage}");
                 return CheckoutView(cart);
             }
 
-            product.StockLevel -= item.Quantity;
+            var refund = await stripePaymentService.RefundAsync(
+                chargeId, $"refund-order-{order.OrderId}");
+            if (refund.Succeeded)
+            {
+                order.Status = OrderStatus.Cancelled;
+                order.StripeRefundId = refund.RefundId;
+                await db.SaveChangesAsync();
+                ModelState.AddModelError(string.Empty,
+                    "Stock changed while payment was processing. Your payment has been refunded.");
+            }
+            else
+            {
+                logger.LogError(
+                    "Automatic refund failed for order {OrderId}, Stripe charge {ChargeId}: {Error}",
+                    order.OrderId, chargeId, refund.ErrorMessage);
+                ModelState.AddModelError(string.Empty,
+                    $"Stock changed after payment. The order is recorded as awaiting a refund. Contact support with order #{order.OrderId} and payment reference {chargeId}. Refund error: {refund.ErrorMessage}");
+            }
+
+            return CheckoutView(cart);
+        }
+
+        foreach (var item in cart.Items)
+        {
+            currentProducts[item.ProductId].StockLevel -= item.Quantity;
         }
 
         order.TotalCost = order.OrderItems.Sum(item => item.UnitPrice * item.Quantity) + order.ShippingCost;
         db.Orders.Add(order);
-        await db.SaveChangesAsync();
+        try
+        {
+            await db.SaveChangesAsync();
+            await transaction.CommitAsync();
+        }
+        catch (DbUpdateException exception)
+        {
+            await transaction.RollbackAsync();
+            logger.LogError(exception,
+                "Could not save order after successful Stripe charge {ChargeId}.", chargeId);
+            var refund = await stripePaymentService.RefundAsync(
+                chargeId, $"refund-order-save-{chargeId}");
+            ModelState.AddModelError(string.Empty, refund.Succeeded
+                ? "The order could not be saved, so your payment has been refunded."
+                : $"The payment succeeded but the order could not be saved and an automatic refund failed. Contact support with payment reference {chargeId}. Refund error: {refund.ErrorMessage}");
+            return CheckoutView(cart);
+        }
+
         shoppingCart.Clear();
         HttpContext.Session.Remove("SelectedCustomerId");
         return RedirectToAction(nameof(Success), new { id = order.OrderId });

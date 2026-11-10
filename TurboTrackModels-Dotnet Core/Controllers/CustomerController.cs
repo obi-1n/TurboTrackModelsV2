@@ -7,7 +7,7 @@ using TurboTrackModels_Dotnet_Core.ViewModels;
 namespace TurboTrackModels_Dotnet_Core.Controllers;
 
 [Authorize(Roles = "Customer")]
-public class CustomerController(TTMDbContext db) : Controller
+public class CustomerController(TTMDbContext db, StripePaymentService stripePaymentService) : Controller
 {
     public async Task<IActionResult> RequestReturns()
     {
@@ -120,11 +120,8 @@ public class CustomerController(TTMDbContext db) : Controller
             return NotFound("Customer profile not found.");
         }
 
-        await using var transaction = await db.Database.BeginTransactionAsync(
-            System.Data.IsolationLevel.Serializable);
         var order = await db.Orders
-            .Include(item => item.OrderItems)
-                .ThenInclude(item => item.Product)
+            .AsNoTracking()
             .FirstOrDefaultAsync(item =>
                 item.OrderId == orderId && item.CustomerID == customer.CustomerID);
         if (order is null)
@@ -134,19 +131,55 @@ public class CustomerController(TTMDbContext db) : Controller
 
         if (order.Status == OrderStatus.Pending)
         {
-            foreach (var item in order.OrderItems)
+            if (string.IsNullOrWhiteSpace(order.StripeChargeId))
             {
-                item.Product.StockLevel += item.Quantity;
+                TempData["ErrorMessage"] =
+                    $"Order #{orderId} has no recorded payment reference and could not be refunded. Contact support.";
+                return RedirectToAction(nameof(OrderHistory));
             }
 
-            order.Status = OrderStatus.Cancelled;
-            await db.SaveChangesAsync();
-            await transaction.CommitAsync();
-            TempData["SuccessMessage"] = $"Order #{orderId} has been cancelled successfully.";
+            var refund = order.StripeRefundId is null
+                ? await stripePaymentService.RefundAsync(
+                    order.StripeChargeId, $"refund-order-{order.OrderId}")
+                : new StripeRefundResult(true, order.StripeRefundId, null);
+            if (!refund.Succeeded)
+            {
+                TempData["ErrorMessage"] =
+                    $"Order #{orderId} could not be cancelled because the payment refund failed: {refund.ErrorMessage}";
+                return RedirectToAction(nameof(OrderHistory));
+            }
+
+            await using var transaction = await db.Database.BeginTransactionAsync(
+                System.Data.IsolationLevel.Serializable);
+            var currentOrder = await db.Orders
+                .Include(item => item.OrderItems)
+                    .ThenInclude(item => item.Product)
+                .FirstOrDefaultAsync(item =>
+                    item.OrderId == orderId && item.CustomerID == customer.CustomerID);
+            if (currentOrder?.Status == OrderStatus.Pending)
+            {
+                foreach (var item in currentOrder.OrderItems)
+                {
+                    item.Product.StockLevel += item.Quantity;
+                }
+
+                currentOrder.Status = OrderStatus.Cancelled;
+                currentOrder.StripeRefundId = refund.RefundId;
+                await db.SaveChangesAsync();
+                await transaction.CommitAsync();
+                TempData["SuccessMessage"] =
+                    $"Order #{orderId} has been cancelled and its payment refunded.";
+            }
+            else
+            {
+                await transaction.RollbackAsync();
+                TempData["ErrorMessage"] =
+                    $"Order #{orderId} is no longer pending. The refund was already requested; contact support if you still need help.";
+            }
+
         }
         else
         {
-            await transaction.RollbackAsync();
             TempData["ErrorMessage"] = $"Order #{orderId} cannot be cancelled as it is already being processed.";
         }
 
