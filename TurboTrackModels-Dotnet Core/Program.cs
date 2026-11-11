@@ -45,7 +45,7 @@ await using (var scope = app.Services.CreateAsyncScope())
     await dbContext.Database.MigrateAsync();
     await DatabaseInitialiser.SeedAsync(scope.ServiceProvider);
 }
-
+//
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
