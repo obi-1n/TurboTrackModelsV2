@@ -1,0 +1,234 @@
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/appsettings.Development.json
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/appsettings.json
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Scalextric Car Images/C4300.jpg
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Scalextric Car Images/C4479.jpg
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Scalextric Car Images/C4510.jpg
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Scalextric Car Images/C4635.jpg
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Scalextric Car Images/C4655.jpg
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Scalextric Car Images/C4669.jpg
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Scalextric Car Images/Screenshot 2026-05-26 162128.png
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/TurboTrackModels-Dotnet Core.staticwebassets.runtime.json
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/TurboTrackModels-Dotnet Core.staticwebassets.endpoints.json
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/TurboTrackModels-Dotnet Core
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/TurboTrackModels-Dotnet Core.deps.json
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/TurboTrackModels-Dotnet Core.runtimeconfig.json
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/TurboTrackModels-Dotnet Core.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/TurboTrackModels-Dotnet Core.pdb
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/ClosedXML.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/ClosedXML.Parser.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/DocumentFormat.OpenXml.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/DocumentFormat.OpenXml.Framework.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/ExcelNumberFormat.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Humanizer.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Microsoft.Build.Framework.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Microsoft.CodeAnalysis.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Microsoft.CodeAnalysis.CSharp.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Microsoft.CodeAnalysis.Workspaces.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Microsoft.CodeAnalysis.ExternalAccess.RazorCompiler.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Microsoft.Data.Sqlite.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Microsoft.EntityFrameworkCore.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Microsoft.EntityFrameworkCore.Design.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Microsoft.EntityFrameworkCore.Relational.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Microsoft.EntityFrameworkCore.Sqlite.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Microsoft.Extensions.DependencyModel.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Microsoft.VisualStudio.SolutionPersistence.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Mono.TextTemplating.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Newtonsoft.Json.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/RBush.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/SixLabors.Fonts.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/SQLitePCLRaw.batteries_v2.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/SQLitePCLRaw.core.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/SQLitePCLRaw.provider.e_sqlite3.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Syncfusion.Compression.Portable.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Syncfusion.Licensing.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Syncfusion.Pdf.Portable.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/Syncfusion.Telemetry.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/System.CodeDom.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/System.Composition.AttributedModel.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/System.Composition.Convention.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/System.Composition.Hosting.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/System.Composition.Runtime.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/System.Composition.TypedParts.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/System.IO.Packaging.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/cs/Microsoft.CodeAnalysis.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/de/Microsoft.CodeAnalysis.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/es/Microsoft.CodeAnalysis.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/fr/Microsoft.CodeAnalysis.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/it/Microsoft.CodeAnalysis.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/ja/Microsoft.CodeAnalysis.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/ko/Microsoft.CodeAnalysis.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/pl/Microsoft.CodeAnalysis.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/pt-BR/Microsoft.CodeAnalysis.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/ru/Microsoft.CodeAnalysis.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/tr/Microsoft.CodeAnalysis.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/zh-Hans/Microsoft.CodeAnalysis.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/zh-Hant/Microsoft.CodeAnalysis.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/cs/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/de/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/es/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/fr/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/it/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/ja/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/ko/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/pl/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/pt-BR/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/ru/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/tr/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/cs/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/de/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/es/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/fr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/it/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/ja/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/ko/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/pl/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/pt-BR/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/ru/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/tr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/cs/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/de/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/es/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/fr/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/it/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/ja/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/ko/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/pl/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/pt-BR/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/ru/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/tr/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/cs/Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/de/Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/es/Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/fr/Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/it/Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/ja/Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/ko/Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/pl/Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/pt-BR/Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/ru/Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/tr/Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/browser-wasm/nativeassets/net9.0/e_sqlite3.a
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/linux-arm/native/libe_sqlite3.so
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/linux-arm64/native/libe_sqlite3.so
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/linux-armel/native/libe_sqlite3.so
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/linux-mips64/native/libe_sqlite3.so
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/linux-musl-arm/native/libe_sqlite3.so
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/linux-musl-arm64/native/libe_sqlite3.so
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/linux-musl-riscv64/native/libe_sqlite3.so
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/linux-musl-s390x/native/libe_sqlite3.so
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/linux-musl-x64/native/libe_sqlite3.so
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/linux-ppc64le/native/libe_sqlite3.so
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/linux-riscv64/native/libe_sqlite3.so
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/linux-s390x/native/libe_sqlite3.so
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/linux-x64/native/libe_sqlite3.so
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/linux-x86/native/libe_sqlite3.so
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/maccatalyst-arm64/native/libe_sqlite3.dylib
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/maccatalyst-x64/native/libe_sqlite3.dylib
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/osx-arm64/native/libe_sqlite3.dylib
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/osx-x64/native/libe_sqlite3.dylib
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/win-arm64/native/e_sqlite3.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/win-x64/native/e_sqlite3.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Release/net10.0/runtimes/win-x86/native/e_sqlite3.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/TurboTrackModels-Dotnet Core.csproj.AssemblyReference.cache
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/rpswa.dswa.cache.json
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/TurboTrackModels-Dotnet Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/TurboTrackModels-Dotnet Core.AssemblyInfoInputs.cache
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/TurboTrackModels-Dotnet Core.AssemblyInfo.cs
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/TurboTrackModels-Dotnet Core.csproj.CoreCompileInputs.cache
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/TurboTrackModels-Dotnet Core.MvcApplicationPartsAssemblyInfo.cache
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/TurboTrackModels-Dotnet Core.RazorAssemblyInfo.cache
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/TurboTrackModels-Dotnet Core.RazorAssemblyInfo.cs
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/TurboTrackModels-Dotnet Core.sourcelink.json
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/rjimswa.dswa.cache.json
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/rjsmrazor.dswa.cache.json
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/rjsmcshtml.dswa.cache.json
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/scopedcss/bundle/TurboTrackModels-Dotnet Core.styles.css
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/scopedcss/projectbundle/TurboTrackModels-Dotnet Core.bundle.scp.css
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/loppckl2fb-{0}-lugek5hnai-lugek5hnai.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/g7zmep1kfw-{0}-61n19gt1b8-61n19gt1b8.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/1zf94zyj56-{0}-fr7q2aak1r-fr7q2aak1r.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/q2ksio5po7-{0}-bqjiyaj88i-bqjiyaj88i.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/dmk4aqaphe-{0}-c2jlpeoesf-c2jlpeoesf.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/zbxthz4rab-{0}-erw9l3u2r3-erw9l3u2r3.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/2mvd6tbx6p-{0}-aexeepp0ev-aexeepp0ev.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/ov7wzsytx9-{0}-d7shbmvgxk-d7shbmvgxk.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/xqpt9pg7s1-{0}-ausgxo2sd3-ausgxo2sd3.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/xvv96rblay-{0}-k8d9w2qqmf-k8d9w2qqmf.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/w8y8vhi97n-{0}-cosvhxvwiu-cosvhxvwiu.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/tlr251nwr6-{0}-ub07r2b239-ub07r2b239.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/eel915zmwr-{0}-fvhpjtyr6v-fvhpjtyr6v.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/lmpvf0l9eh-{0}-b7pk76d08c-b7pk76d08c.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/bttdcvienj-{0}-fsbi9cje9m-fsbi9cje9m.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/i6o4305y06-{0}-rzd6atqjts-rzd6atqjts.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/booyebvecl-{0}-ee0r1s7dh0-ee0r1s7dh0.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/ybfsj8oeph-{0}-dxx9fxp4il-dxx9fxp4il.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/4769le5uc0-{0}-jd9uben2k1-jd9uben2k1.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/gby0kk17lv-{0}-khv3u5hwcm-khv3u5hwcm.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/4qpdqbieiw-{0}-r4e9w2rdcm-r4e9w2rdcm.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/dyvt2n7l83-{0}-lcd1t2u6c8-lcd1t2u6c8.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/c158yttn8t-{0}-c2oey78nd0-c2oey78nd0.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/vbtgangmbj-{0}-tdbxkamptv-tdbxkamptv.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/tecxa1um0z-{0}-j5mq2jizvt-j5mq2jizvt.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/5lo5tpxitr-{0}-06098lyss8-06098lyss8.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/0v283ucjec-{0}-nvvlpmu67g-nvvlpmu67g.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/bx16kwph29-{0}-s35ty4nyc5-s35ty4nyc5.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/n7bbnzgbf5-{0}-pj5nd1wqec-pj5nd1wqec.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/03jqf9tf6k-{0}-46ein0sx1k-46ein0sx1k.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/jl8j22a154-{0}-v0zj4ognzu-v0zj4ognzu.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/kz44ycd12y-{0}-37tfw0ft22-37tfw0ft22.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/kd13mjqb5u-{0}-hrwsygsryq-hrwsygsryq.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/lr8ta0bfaf-{0}-pk9g2wxc8p-pk9g2wxc8p.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/qunkrmsix3-{0}-ft3s53vfgj-ft3s53vfgj.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/738bxq85t4-{0}-6cfz1n2cew-6cfz1n2cew.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/z3koy04ufg-{0}-6pdc2jztkx-6pdc2jztkx.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/5w6d6mquib-{0}-493y06b0oq-493y06b0oq.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/rvxdlw1fe2-{0}-iovd86k7lj-iovd86k7lj.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/szd5bpokcb-{0}-vr1egmr9el-vr1egmr9el.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/yf41rk0hux-{0}-kbrnm935zg-kbrnm935zg.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/u09vq7y822-{0}-jj8uyg4cgr-jj8uyg4cgr.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/5z3q7di140-{0}-y7v9cxd14o-y7v9cxd14o.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/yduachi9jz-{0}-notf2xhcfb-notf2xhcfb.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/mxzcdn213j-{0}-h1s4sie4z3-h1s4sie4z3.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/uwrpcz0st4-{0}-63fj8s7r0e-63fj8s7r0e.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/8rd14r12p3-{0}-0j3bgjxly4-0j3bgjxly4.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/ft5feyhizr-{0}-47otxtyo56-47otxtyo56.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/bhnyl1lb2s-{0}-4v8eqarkd7-4v8eqarkd7.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/gi68z15j2l-{0}-l3n5xuwxn8-l3n5xuwxn8.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/ykmflxq0p8-{0}-ilo7uva0vt-ilo7uva0vt.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/eccp6nvhpp-{0}-qlccset4i1-qlccset4i1.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/ujyjw59p3t-{0}-lzl9nlhx6b-lzl9nlhx6b.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/avx2ybq94r-{0}-ag7o75518u-ag7o75518u.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/3zkhh2wz8e-{0}-xzw0cte36n-xzw0cte36n.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/s1fe6zdvjm-{0}-0i3buxo5is-0i3buxo5is.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/st78y7jj9c-{0}-o1o13a6vjx-o1o13a6vjx.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/c46j6t461c-{0}-ttgo8qnofa-ttgo8qnofa.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/5c9pe8jxdf-{0}-2z0ns9nrw6-2z0ns9nrw6.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/rw05dw846e-{0}-muycvpuwrr-muycvpuwrr.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/4t1kak3312-{0}-87fc7y1x7t-87fc7y1x7t.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/airk24ecqa-{0}-jfsiqqwiad-jfsiqqwiad.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/9f42necd29-{0}-6vy4yk6rvm-6vy4yk6rvm.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/compressed/oow5ghf92s-{0}-6vy4yk6rvm-6vy4yk6rvm.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/staticwebassets.build.json
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/staticwebassets.build.json.cache
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/staticwebassets.development.json
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/staticwebassets.build.endpoints.json
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/swae.build.ex.cache
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/TurboTra.7699BFBF.Up2Date
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/TurboTrackModels-Dotnet Core.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/refint/TurboTrackModels-Dotnet Core.dll
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/TurboTrackModels-Dotnet Core.pdb
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/TurboTrackModels-Dotnet Core.genruntimeconfig.cache
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Release/net10.0/ref/TurboTrackModels-Dotnet Core.dll

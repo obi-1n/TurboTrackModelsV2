@@ -1,0 +1,8 @@
+﻿services:
+  turbotrackmodels:
+    image: turbotrackmodels
+    build:
+      context: .
+      dockerfile: TurboTrackModels-Dotnet Core/Dockerfile
+    ports:
+      - "8080:8080"
