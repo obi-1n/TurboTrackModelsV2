@@ -224,10 +224,37 @@
 /Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Syncfusion.Licensing.dll
 /Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Syncfusion.Pdf.Portable.dll
 /Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Syncfusion.Telemetry.dll
-/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Scalextric Car Images/C4300.jpg
-/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Scalextric Car Images/C4479.jpg
-/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Scalextric Car Images/C4510.jpg
-/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Scalextric Car Images/C4635.jpg
-/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Scalextric Car Images/C4655.jpg
-/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Scalextric Car Images/C4669.jpg
-/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/bin/Debug/net10.0/Scalextric Car Images/Screenshot 2026-05-26 162128.png
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/fugajy3z0x-{0}-4qewknlhhe-4qewknlhhe.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/1j42uudpo5-{0}-lni73340tj-lni73340tj.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/7lzmksvcq0-{0}-dldhcrg7tj-dldhcrg7tj.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/cpgi9prfzk-{0}-7mduziv6u0-7mduziv6u0.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/5w1j0887q5-{0}-k77ja6ojiw-k77ja6ojiw.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/dra1i55fc6-{0}-o2603f55wz-o2603f55wz.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/ygcrx2hxv1-{0}-1h967pd9y7-1h967pd9y7.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/0jij82tc94-{0}-c9vlz3rxj1-c9vlz3rxj1.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/fjgxg9xg72-{0}-aa7xbl0rhm-aa7xbl0rhm.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/gw5xhd4uop-{0}-l3dvo8xkxk-l3dvo8xkxk.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/dk93zfstrh-{0}-f60t7moryz-f60t7moryz.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/qa4b9oj76r-{0}-2hu6j6r8fj-2hu6j6r8fj.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/e9i55en7xa-{0}-0ewczrgofc-0ewczrgofc.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/sjqfsegni7-{0}-1g6wsxogud-1g6wsxogud.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/6gcm6qv50w-{0}-gyj16cx8tl-gyj16cx8tl.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/j0019avzhm-{0}-6k0x1vcin3-6k0x1vcin3.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/nes2cuuobh-{0}-avhg9diubf-avhg9diubf.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/x7cwgruxwk-{0}-nmg369ex7u-nmg369ex7u.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/xvp2hvjeeg-{0}-3lukdf9ezp-3lukdf9ezp.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/coh9qqd8xr-{0}-hlpl0prczm-hlpl0prczm.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/6sy36t9b7o-{0}-p13uj7zzzw-p13uj7zzzw.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/8famck1dqq-{0}-rat98tutyt-rat98tutyt.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/0e5wrsttts-{0}-cwuaox3pd4-cwuaox3pd4.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/r8yiwdj7et-{0}-j526q8vwd3-j526q8vwd3.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/dq27976148-{0}-2w652sptew-2w652sptew.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/e1cxe8toc6-{0}-yk6841fnnu-yk6841fnnu.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/5l03z0a2gl-{0}-00o7me0wi0-00o7me0wi0.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/0i2nzputng-{0}-tlr56zwpn9-tlr56zwpn9.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/aosvoxbmhe-{0}-9065ftxq2z-9065ftxq2z.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/lhq6dkc9rw-{0}-slkxxxvi35-slkxxxvi35.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/qwbn1jcv8g-{0}-tf8d8chiq4-tf8d8chiq4.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/a5hlmxi6bd-{0}-lbdsg3nnm3-lbdsg3nnm3.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/ori40w8783-{0}-pdac4zzycb-pdac4zzycb.gz
+/Users/anthonynnegha/Desktop/TurboTrackModels-Dotnet Core/TurboTrackModels-Dotnet Core/obj/Debug/net10.0/compressed/9ujbf0htvs-{0}-o7o0c63y0u-o7o0c63y0u.gz

@@ -6,6 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>TurboTrackModels_Dotnet_Core</RootNamespace>
       <UserSecretsId>4414d4f8-bf72-47ac-81ad-f04472faee7d</UserSecretsId>
+      <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
     <ItemGroup>
@@ -20,7 +21,48 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Content Include="..\.dockerignore">
+          <Link>.dockerignore</Link>
+        </Content>
         <Content Include="Scalextric Car Images/**/*" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="wwwroot\Content\bootstrap-grid.css" />
+      <None Include="wwwroot\Content\bootstrap-grid.css.map" />
+      <None Include="wwwroot\Content\bootstrap-grid.min.css" />
+      <None Include="wwwroot\Content\bootstrap-grid.min.css.map" />
+      <None Include="wwwroot\Content\bootstrap-grid.rtl.css" />
+      <None Include="wwwroot\Content\bootstrap-grid.rtl.css.map" />
+      <None Include="wwwroot\Content\bootstrap-grid.rtl.min.css" />
+      <None Include="wwwroot\Content\bootstrap-grid.rtl.min.css.map" />
+      <None Include="wwwroot\Content\bootstrap-reboot.css" />
+      <None Include="wwwroot\Content\bootstrap-reboot.css.map" />
+      <None Include="wwwroot\Content\bootstrap-reboot.min.css" />
+      <None Include="wwwroot\Content\bootstrap-reboot.min.css.map" />
+      <None Include="wwwroot\Content\bootstrap-reboot.rtl.css" />
+      <None Include="wwwroot\Content\bootstrap-reboot.rtl.css.map" />
+      <None Include="wwwroot\Content\bootstrap-reboot.rtl.min.css" />
+      <None Include="wwwroot\Content\bootstrap-reboot.rtl.min.css.map" />
+      <None Include="wwwroot\Content\bootstrap-utilities.css" />
+      <None Include="wwwroot\Content\bootstrap-utilities.css.map" />
+      <None Include="wwwroot\Content\bootstrap-utilities.min.css" />
+      <None Include="wwwroot\Content\bootstrap-utilities.min.css.map" />
+      <None Include="wwwroot\Content\bootstrap-utilities.rtl.css" />
+      <None Include="wwwroot\Content\bootstrap-utilities.rtl.css.map" />
+      <None Include="wwwroot\Content\bootstrap-utilities.rtl.min.css" />
+      <None Include="wwwroot\Content\bootstrap-utilities.rtl.min.css.map" />
+      <None Include="wwwroot\Content\bootstrap.css" />
+      <None Include="wwwroot\Content\bootstrap.css.map" />
+      <None Include="wwwroot\Content\bootstrap.min.css" />
+      <None Include="wwwroot\Content\bootstrap.min.css.map" />
+      <None Include="wwwroot\Content\bootstrap.rtl.css" />
+      <None Include="wwwroot\Content\bootstrap.rtl.css.map" />
+      <None Include="wwwroot\Content\bootstrap.rtl.min.css" />
+      <None Include="wwwroot\Content\bootstrap.rtl.min.css.map" />
+      <None Include="wwwroot\Content\cart.css" />
+      <None Include="wwwroot\Content\ProductImages\C4650.jpg" />
+      <None Include="wwwroot\Content\Site.css" />
     </ItemGroup>
 
 </Project>
