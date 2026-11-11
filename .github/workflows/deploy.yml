@@ -37,7 +37,7 @@ jobs:
       - name: Validate SSH key
         run: |
           echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
-          ls -l key.pem
+          chmod 600 key.pem
           head -1 key.pem
           tail -1 key.pem
           ssh-keygen -l -f key.pem
