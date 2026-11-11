@@ -38,9 +38,7 @@ jobs:
         run: |
           echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
           chmod 600 key.pem
-          head -1 key.pem
-          tail -1 key.pem
-          ssh-keygen -l -f key.pem
+          wc -l key.pem
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.2.0
