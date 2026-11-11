@@ -21,7 +21,10 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t obi1n/turbotrackmodels:latest .
+         docker build \
+           -t obi1n/turbotrackmodels:latest \
+           -f "TurboTrackModels-Dotnet Core/Dockerfile" \
+           .
 
       - name: Push Docker Image
         run: |
