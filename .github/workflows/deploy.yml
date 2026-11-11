@@ -29,7 +29,8 @@ jobs:
       - name: Push Docker Image
         run: |
           docker push obi1n/turbotrackmodels:latest
-     - name: Check key format
+          
+      - name: Check key format
         run: |
           echo "${{ secrets.EC2_SSH_KEY }}" | head -1
 
