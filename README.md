@@ -59,6 +59,19 @@ dotnet ef migrations add DescriptiveMigrationName
 dotnet build
 ```
 
+## Deployment
+
+The site is hosted on an Amazon EC2 instance and deployed with GitHub Actions. A push to the `main` branch triggers the workflow in `.github/workflows/deploy.yml`, which builds the Docker image, pushes it to Docker Hub, then connects to the EC2 instance over SSH to pull and run the updated image. The container listens on port `8080`, mapped to port `80` on the instance.
+
+Configure these GitHub Actions repository secrets before deploying:
+
+- `DOCKER_USERNAME` and `DOCKER_PASSWORD` — Docker Hub credentials used to publish the image.
+- `EC2_HOST` — the EC2 instance hostname or IP address.
+- `EC2_USERNAME` — the SSH username for the instance.
+- `EC2_SSH_KEY` — the SSH private key used by the deployment workflow.
+
+The deployed application also needs the Stripe environment variables described in [Configure Stripe](#configure-stripe).
+
 ## Static assets and exports
 
 Site stylesheets are served from `/Content`, and car images are served from `/Scalextric Car Images`. Invoice PDFs are generated with Syncfusion PDF; report spreadsheets are generated with ClosedXML.
