@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TurboTrackModels-Dotnet Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+320b245703c21bdfb4ee512e1412e5c4fa18176b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ada77c770d9dd2d0833f30c24f793c6559593e3d")]
 [assembly: System.Reflection.AssemblyProductAttribute("TurboTrackModels-Dotnet Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TurboTrackModels-Dotnet Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
