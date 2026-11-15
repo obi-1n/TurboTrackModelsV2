@@ -17,14 +17,14 @@ jobs:
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Build Docker Image
         run: |
-         docker build \
-           -t obi1n/turbotrackmodels:latest \
-           -f "TurboTrackModels-Dotnet Core/Dockerfile" \
-           .
+          docker build \
+            -t obi1n/turbotrackmodels:latest \
+            -f "TurboTrackModels-Dotnet Core/Dockerfile" \
+            .
 
       - name: Push Docker Image
         run: |
@@ -46,3 +46,5 @@ jobs:
               --name turbotrackmodels \
               -p 80:8080 \
               obi1n/turbotrackmodels:latest
+
+            sudo docker ps
